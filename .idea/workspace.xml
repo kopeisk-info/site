@@ -1,13 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="a2b3cc2f-63e9-480f-8b10-2499db601759" name="Default Changelist" comment="" />
+    <list default="true" id="a2b3cc2f-63e9-480f-8b10-2499db601759" name="Default Changelist" comment="Добавление исходных файлов">
+      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/site.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/site.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
@@ -17,6 +42,9 @@
         <option value="composer.json" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -121,6 +149,7 @@
       <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
       <path value="$PROJECT_DIR$/vendor/vlucas/phpdotenv" />
       <path value="$PROJECT_DIR$/vendor/theseer/tokenizer" />
+      <path value="$PROJECT_DIR$/vendor/vkcom/vk-php-sdk" />
     </include_path>
   </component>
   <component name="ProjectId" id="1gOom2kxUF6lVUw7U38sXxZr9ng" />
@@ -131,7 +160,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/project_old/kopeisk.info/www" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
   </component>
@@ -150,21 +179,45 @@
       <option name="presentableId" value="Default" />
       <updated>1597995155191</updated>
       <workItem from="1597995156357" duration="1370000" />
+      <workItem from="1598001688666" duration="579000" />
     </task>
+    <task id="LOCAL-00001" summary="Добавление исходных файлов">
+      <created>1598001856191</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1598001856191</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Добавление исходных файлов" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавление исходных файлов" />
   </component>
   <component name="WindowStateProjectService">
     <state x="491" y="251" width="375" height="234" key="#Composer" timestamp="1597997202515">
       <screen x="0" y="0" width="1366" height="741" />
     </state>
     <state x="491" y="251" width="375" height="234" key="#Composer/0.0.1366.741@0.0.1366.741" timestamp="1597997202515" />
-    <state x="466" y="128" width="426" height="480" key="FileChooserDialogImpl" timestamp="1598001676634">
+    <state x="466" y="128" width="426" height="480" key="FileChooserDialogImpl" timestamp="1598001937808">
       <screen x="0" y="0" width="1366" height="741" />
     </state>
-    <state x="466" y="128" width="426" height="480" key="FileChooserDialogImpl/0.0.1366.741@0.0.1366.741" timestamp="1598001676634" />
+    <state x="466" y="128" width="426" height="480" key="FileChooserDialogImpl/0.0.1366.741@0.0.1366.741" timestamp="1598001937808" />
     <state width="1320" height="177" key="GridCell.Tab.0.bottom" timestamp="1598001683579">
       <screen x="0" y="0" width="1366" height="741" />
     </state>
@@ -181,5 +234,9 @@
       <screen x="0" y="0" width="1366" height="741" />
     </state>
     <state width="1320" height="177" key="GridCell.Tab.0.right/0.0.1366.741@0.0.1366.741" timestamp="1598001683577" />
+    <state x="499" y="286" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1598001873388">
+      <screen x="0" y="0" width="1366" height="741" />
+    </state>
+    <state x="499" y="286" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.741@0.0.1366.741" timestamp="1598001873388" />
   </component>
 </project>
