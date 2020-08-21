@@ -4,6 +4,7 @@ namespace App\Console\Commands\Vk;
 use Illuminate\Console\Command;
 
 use VK\Client\VKApiClient;
+use App\VkUser;
 
 class GetUsers extends Command
 {
@@ -38,20 +39,27 @@ class GetUsers extends Command
      */
     public function handle()
     {
-        if (($ids = explode(',', $this->argument('ids'))) && current($ids)) {
-            $vk = new VKApiClient();
+        $vk = new VKApiClient();
 
-            $response = $vk->users()->get(env('VK_SERVICE_KEY'), [
-                'lang' => 'ru',
-                'fields' => [
-                    'photo_50',
-                    'screen_name',
-                    'sex',
-                ],
-                'user_ids' => $ids,
-            ]);
+        if ($ids = $this->argument('ids')) {
+            $ids = explode(',', $ids);
+        } else {
+            $collection = VkUser::get();
+            $ids = $collection->modelKeys();
+        }
 
-            print_r($response);
+        $response = $vk->users()->get(env('VK_SERVICE_KEY'), [
+            'lang' => 'ru',
+            'fields' => [
+                'photo_50',
+                'screen_name',
+                'sex',
+            ],
+            'user_ids' => $ids,
+        ]);
+
+        foreach ($response as $item) {
+            VkUser::updateOrCreate(['id' => $item['id']], $item);
         }
     }
 }
