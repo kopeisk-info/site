@@ -4,6 +4,7 @@ namespace App\Console\Commands\Vk;
 use Illuminate\Console\Command;
 
 use VK\Client\VKApiClient;
+use App\VkPost;
 
 class GetPosts extends Command
 {
@@ -12,7 +13,7 @@ class GetPosts extends Command
      *
      * @var string
      */
-    protected $signature = 'vk:get-posts {id?}';
+    protected $signature = 'vk:get-posts {id?} {--group}';
 
     /**
      * The console command description.
@@ -43,11 +44,16 @@ class GetPosts extends Command
 
             $response = $vk->wall()->get(env('VK_SERVICE_KEY'), [
                 'lang' => 'ru',
-                'owner_id'  => $id,
+                'owner_id'  => $this->option('group') ? "-$id" : $id,
                 'filter' => 'all',
             ]);
 
-            print_r($response);
+            foreach($response['items'] as $item) {
+                VkPost::updateOrCreate([
+                    'owner_id' => $item['owner_id'],
+                    'id' => $item['id']
+                ], $item);
+            };
         }
     }
 }

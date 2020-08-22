@@ -13,7 +13,7 @@ class GetGroups extends Command
      *
      * @var string
      */
-    protected $signature = 'vk:get-groups {ids?}';
+    protected $signature = 'vk:get-groups {ids?} {--copy}';
 
     /**
      * The console command description.
@@ -57,6 +57,10 @@ class GetGroups extends Command
         ]);
 
         foreach ($response as $item) {
+            if ($this->option('copy')) {
+                $item['from_copy'] = true;
+            }
+
             VkGroup::updateOrCreate(['id' => $item['id']], $item);
         }
     }
