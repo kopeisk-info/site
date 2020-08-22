@@ -17,10 +17,11 @@ class CreateVkUsersTable extends Migration
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
-            $table->boolean('is_closed');
-            $table->boolean('can_access_closed');
+            $table->boolean('is_closed')->default(0);
+            $table->boolean('can_access_closed')->default(0);
+            $table->boolean('from_copy')->default(0);
             $table->smallInteger('sex');
-            $table->string('screen_name');
+            $table->string('screen_name')->nullable();
             $table->string('photo_50');
             $table->timestamps();
         });

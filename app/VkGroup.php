@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class VkGroup extends Model
 {
@@ -13,7 +14,7 @@ class VkGroup extends Model
      */
     protected $fillable = [
         'id', 'name', 'screen_name',
-        'is_closed', 'type',
+        'is_closed', 'from_copy', 'type',
         'photo_50'
     ];
 
@@ -34,4 +35,9 @@ class VkGroup extends Model
     protected $casts = [
         // ...
     ];
+
+    public function scopeUpdateOlderThan($query, $interval)
+    {
+        return $query->where('updated_at', '<=', Carbon::now()->subMinutes($interval)->toDateTimeString());
+    }
 }
