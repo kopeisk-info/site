@@ -4,6 +4,7 @@ namespace App\Console\Commands\Vk;
 use Illuminate\Console\Command;
 
 use VK\Client\VKApiClient;
+use App\VkGroup;
 
 class GetGroups extends Command
 {
@@ -38,18 +39,25 @@ class GetGroups extends Command
      */
     public function handle()
     {
-        if (($ids = explode(',', $this->argument('ids'))) && current($ids)) {
-            $vk = new VKApiClient();
+        $vk = new VKApiClient();
 
-            $response = $vk->groups()->getById(env('VK_SERVICE_KEY'), [
-                'lang' => 'ru',
-                'group_ids'  => $ids,
-                'fields' => [
-                    'photo_50',
-                ],
-            ]);
+        if ($ids = $this->argument('ids')) {
+            $ids = explode(',', $ids);
+        } else {
+            $collection = VkGroup::get();
+            $ids = $collection->modelKeys();
+        }
 
-            print_r($response);
+        $response = $vk->groups()->getById(env('VK_SERVICE_KEY'), [
+            'lang' => 'ru',
+            'group_ids'  => $ids,
+            'fields' => [
+                'photo_50',
+            ],
+        ]);
+
+        foreach ($response as $item) {
+            VkGroup::updateOrCreate(['id' => $item['id']], $item);
         }
     }
 }
