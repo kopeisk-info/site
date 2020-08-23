@@ -21,6 +21,7 @@ class CreateVkPostsTable extends Migration
             $table->boolean('marked_as_ads')->default(0);
             $table->string('post_type');
             $table->longText('text')->nullable();
+            $table->json('attachments')->nullable();
             $table->jsonb('copy_history')->nullable();
             $table->json('post_source')->nullable();
             $table->json('comments')->nullable();
