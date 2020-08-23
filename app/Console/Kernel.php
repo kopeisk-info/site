@@ -24,6 +24,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('vk:wall-users')->withoutOverlapping()->everyFiveMinutes();
+        $schedule->command('vk:wall-groups')->withoutOverlapping()->everyFiveMinutes();
         // $schedule->command('inspire')->hourly();
     }
 
