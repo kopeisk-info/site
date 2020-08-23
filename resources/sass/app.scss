@@ -1,1 +1,120 @@
-//
+// Bootstrap framework
+@import "bootstrap";
+
+// Site stylesheet
+a {
+    color: #16489A;
+    text-decoration: none;
+    outline: none;
+    border-bottom: 1px solid rgba(22, 72, 154, .3);
+    &:hover {
+        color: #c00 !important;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(204, 0, 0, .3);
+    }
+    &.light {
+        color: #f1f1f1;
+        border-bottom-color: rgba(241, 241, 241, .3);
+        &:hover {
+            color: #fff !important;
+            border-bottom-color: rgba(255, 255, 255, .3);
+        }
+    }
+}
+
+body {
+    background-color: #f1f1f1;
+    color: #444;
+    font: 15px/20px 'PT Sans', Helvetica, Arial, sans-serif;
+    cursor: default;
+    overflow-y: scroll;
+}
+.header {
+    padding: 75px 0 75px;
+    .logo {
+        font: 40px/50px 'PT Sans Narrow', Helvetica, Arial, sans-serif;
+    }
+}
+.wall {
+    &-title {
+        font: 30px/40px 'PT Sans Narrow', Helvetica, Arial, sans-serif;
+    }
+    &-avatar {
+        margin-right: 15px;
+    }
+    &-content {
+        overflow: hidden;
+    }
+    &-post {
+        margin: 30px 0 30px;
+        display: flex;
+    }
+    &-notice {
+        margin: 20px 0 0;
+        font-size: 13px;
+        color: #888;
+    }
+    &-repost {
+        font-size: 13px;
+        padding-top: 10px;
+        .wall-avatar {
+            float: left;
+            img {
+                width: 35px;
+            }
+        }
+    }
+}
+.footer {
+    padding: 75px 0 75px;
+    background: #f1f1f1;
+
+    &-place {
+        margin: 0 0 30px;
+        &-index {
+            margin: 6px 0 0;
+            font-size: 13px;
+            color: #888;
+        }
+    }
+    &-contact {
+        &-link {
+            text-align: center;
+            margin: 0 0 11px;
+            list-style: none;
+            li {
+                margin: 0 20px 20px;
+                display: inline-block;
+            }
+        }
+    }
+
+    &-copy {
+        margin: 0 0 6px;
+        text-align: center;
+        font-size: 13px;
+        color: #888;
+    }
+
+    &-version {
+        text-align: center;
+        font-size: 13px;
+        color: #888;
+    }
+}
+
+@media (min-width:400px) {
+    .wall-column {
+        column-count: 1;
+    }
+}
+@media (min-width:600px) {
+    .wall-column {
+        column-count: 2;
+    }
+}
+@media (min-width:800px) {
+    .wall-column {
+        column-count: 3;
+    }
+}
