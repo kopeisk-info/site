@@ -14,5 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('index', ['items' => App\VkPost::orderBy('date', 'DESC')->limit(100)->get()]);
+})->name('root');
+
+Route::get('/test', function () {
+    return view('index', ['items' => App\VkUserPost::limit(100)->get()]);
+})->name('test');

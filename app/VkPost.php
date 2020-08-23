@@ -15,7 +15,7 @@ class VkPost extends Model
     protected $fillable = [
         'id', 'from_id', 'owner_id',
         'date', 'marked_as_ads', 'post_type',
-        'text', 'copy_history', 'post_source',
+        'text', 'attachments', 'copy_history', 'post_source',
         'comments', 'likes', 'reposts', 'views'
     ];
 
@@ -35,6 +35,7 @@ class VkPost extends Model
      */
     protected $casts = [
         'date' => 'datetime',
+        'attachments' => 'array',
         'copy_history' => 'array',
         'post_source' => 'array',
         'comments' => 'array',
@@ -42,6 +43,16 @@ class VkPost extends Model
         'reposts' => 'array',
         'views' => 'array',
     ];
+
+    public function owner()
+    {
+        $relation = $this->hasOne('App\VkUser', 'id', 'from_id');
+        if (!preg_match('/^\d+$/', $this->from_id)) {
+            $this->attributes['from_id'] = trim($this->attributes['from_id'], '-');
+            $relation = $this->hasOne('App\VkGroup', 'id', 'from_id');
+        }
+        return $relation;
+    }
 
     public static function boot()
     {
