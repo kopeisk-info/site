@@ -14,9 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index', ['items' => App\VkPost::orderBy('date', 'DESC')->limit(100)->get()]);
+    return view('index', ['items' => App\VkPost::orderBy('date', 'DESC')->limit(10)->get()]);
 })->name('root');
 
-Route::get('/test', function () {
-    return view('index', ['items' => App\VkUserPost::limit(100)->get()]);
-})->name('test');
+Route::get('/live', function () {
+    return view('live', ['items' => App\VkPost::orderBy('date', 'DESC')->limit(100)->get()]);
+})->name('live');
+
+Route::get('/catalog/minister', function () {
+    // ...
+});
+
+Route::get('/catalog/church', function () {
+    // ...
+});

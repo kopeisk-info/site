@@ -44,6 +44,15 @@ class VkPost extends Model
         'views' => 'array',
     ];
 
+    public function getTextAttribute($value)
+    {
+        if (preg_match('/\[(.*)\|(.*)\]/', $value, $matches)) {
+            $replace = "<a href='https://vk.com/id$matches[1]' title='$matches[2]'>$matches[2]</a>";
+            $value = str_replace($matches[0], $matches[2] , $value);
+        }
+        return $value;
+    }
+
     public function owner()
     {
         $relation = $this->hasOne('App\VkUser', 'id', 'from_id');
