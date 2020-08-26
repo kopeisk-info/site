@@ -44,6 +44,7 @@ class CreateChurchesTable extends Migration
             $table->string('contact_phone')->nullable()->comment('Контактный номер телефона');
 
             $table->unsignedBigInteger('parent')->nullable();
+
             $table->timestamps();
         });
     }

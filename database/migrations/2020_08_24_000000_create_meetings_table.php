@@ -15,7 +15,7 @@ class CreateMeetingsTable extends Migration
     {
         Schema::create('meetings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('church');
+            $table->foreignId('church_id')->references('id')->on('churches')->onDelete('cascade');
 
             $table->string('name');
             $table->text('description');
