@@ -16,8 +16,9 @@ class CreateChurchMinistersTable extends Migration
         Schema::create('church_ministers', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('church');
-            $table->unsignedBigInteger('minister');
+            $table->foreignId('church_id')->references('id')->on('churches')->onDelete('cascade');
+            $table->foreignId('minister_id')->references('id')->on('ministers')->onDelete('cascade');
+
             $table->string('ordination');
 
             $table->timestamps();
