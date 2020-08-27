@@ -1,0 +1,37 @@
+.footer {
+    padding: 75px 0 75px;
+    background: #f1f1f1;
+
+    &-place {
+        margin: 0 0 30px;
+        &-index {
+            margin: 6px 0 0;
+            font-size: 13px;
+            color: #888;
+        }
+    }
+    &-contact {
+        &-link {
+            text-align: center;
+            margin: 0 0 11px;
+            list-style: none;
+            li {
+                margin: 0 20px 20px;
+                display: inline-block;
+            }
+        }
+    }
+
+    &-copy {
+        margin: 0 0 6px;
+        text-align: center;
+        font-size: 13px;
+        color: #888;
+    }
+
+    &-version {
+        text-align: center;
+        font-size: 13px;
+        color: #888;
+    }
+}
