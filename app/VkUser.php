@@ -41,4 +41,9 @@ class VkUser extends Model
     {
         return $query->where('updated_at', '<=', Carbon::now()->subMinutes($interval)->toDateTimeString());
     }
+
+    public function getNameAttribute()
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
 }

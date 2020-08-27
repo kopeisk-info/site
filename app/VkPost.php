@@ -36,7 +36,7 @@ class VkPost extends Model
     protected $casts = [
         'date' => 'datetime',
         'attachments' => 'array',
-        'copy_history' => 'array',
+        'copy_history' => 'collection',
         'post_source' => 'array',
         'comments' => 'array',
         'likes' => 'array',
@@ -53,7 +53,7 @@ class VkPost extends Model
         return $value;
     }
 
-    public function owner()
+    public function from()
     {
         $relation = $this->hasOne('App\VkUser', 'id', 'from_id');
         if (!preg_match('/^\d+$/', $this->from_id)) {

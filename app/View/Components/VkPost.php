@@ -11,7 +11,7 @@ class VkPost extends Component
         $post_id, $post_type,
         $date, $text, $image,
         $action, $from_link, $post_link,
-        $comments, $likes, $reposts, $views;
+        $comments, $likes, $reposts = 0, $views = 0;
 
     public $repost;
 
@@ -54,25 +54,15 @@ class VkPost extends Component
         if ($post->attachments) {
             $attachment = current($post->attachments);
             if ('photo' === $attachment['type']) {
-                if (!isset($attachment['photo']['sizes']['7']['url'])) {
-                    dd($attachment['photo']['sizes']);
-                    $this->image = $attachment['photo']['sizes']['3']['url'];
-                } else {
-                    $this->image = $attachment['photo']['sizes']['7']['url'];
-                }
+                $key = array_search('x', array_column($attachment['photo']['sizes'], 'type'));
+                $this->image = $attachment['photo']['sizes'][$key]['url'];
             } elseif ('video' === $attachment['type']) {
-                if (!isset($attachment['video']['image']['7']['url'])) {
-                    $this->image = $attachment['video']['image']['3']['url'];
-                } else {
-                    $this->image = $attachment['video']['image']['7']['url'];
-                }
+                $key = array_search('x', array_column($attachment['video']['image'], 'type'));
+                $this->image = $attachment['video']['image'][$key]['url'];
             } elseif (('link' === $attachment['type']) && isset($attachment['link']['photo'])) {
                 $this->action = 'ссылка';
-                if (!isset($attachment['link']['photo']['sizes']['7'])) {
-                    $this->image = $attachment['link']['photo']['sizes']['3']['url'];
-                } else {
-                    $this->image = $attachment['link']['photo']['sizes']['7']['url'];
-                }
+                $key = array_search('x', array_column($attachment['link']['photo']['sizes'], 'type'));
+                $this->image = $attachment['link']['photo']['sizes'][$key]['url'];
             }
         }
 
@@ -82,10 +72,10 @@ class VkPost extends Component
         if ($post->likes && $post->likes['can_like']) {
             $this->likes = $post->likes['count'];
         }
-        if ($this->reposts) {
+        if ($post->reposts && $post->reposts['count']) {
             $this->reposts = $post->reposts['count'];
         }
-        if ($this->views) {
+        if ($post->views && $post->views['count']) {
             $this->views = $post->views['count'];
         }
 

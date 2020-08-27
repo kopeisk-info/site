@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Resources\VkPostsResource;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,13 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index', ['items' => App\VkPost::orderBy('date', 'DESC')->limit(10)->get()]);
-})->name('root');
+Route::get('/', 'IndexController@show')->name('root');
 
-Route::get('/live', function () {
-    return view('live', ['items' => App\VkPost::orderBy('date', 'DESC')->limit(100)->get()]);
-})->name('live');
+Route::get('/', function () {
+    return view('live', ['posts' => App\VkPost::orderBy('date', 'DESC')->limit(30)->get()]);
+})->name('root');
 
 Route::get('/catalog/minister', function () {
     // ...

@@ -14,8 +14,11 @@
                 <div style="font-size: 13px; margin-top: 5px;">{{ $date->diffForHumans() }}{{ $action ? ', '. $action : '' }}</div>
             </div>
         </div>
-        <p class="card-text" style="padding-top: 10px;">{{ $text }}</p>
-         @if ($repost)
+        <p class="card-text" style="padding-top: 10px;">{{ Str::limit($text, 400) }}{{-- preg_replace('/\s+?(\S+)?$/', '', substr($text . ' ', 0, 500)) --}}</p>
+        @if(400 < Str::length($text))
+            <div class="card-opacity"></div>
+        @endif
+        @if ($repost)
             <div class="card" style="margin: 15px 0;">
                 @if ($repost->image)
                     <img src="{{ $repost->image }}" class="card-img-top" alt="{{ $repost->name }}">
@@ -32,7 +35,10 @@
                             <div style="font-size: 13px; margin-top: 5px;">{{ $date->diffForHumans() }}{{ $action ? ', '. $action : '' }}</div>
                         </div>
                     </div>
-                    <p class="card-text" style="padding-top: 10px; font-size: 14px">{{ $repost->text }}</p>
+                    <p class="card-text" style="padding-top: 10px; font-size: 14px">{{ Str::limit($repost->text, 400) }}{{-- preg_replace('/\s+?(\S+)?$/', '', substr($repost->text . ' ', 0, 500)) --}}</p>
+                    @if(400 < Str::length($repost->text))
+                        <div class="card-opacity"></div>
+                    @endif
                 </div>
             </div>
         @endif
