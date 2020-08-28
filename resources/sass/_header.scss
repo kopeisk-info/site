@@ -1,0 +1,17 @@
+.header {
+    margin: 0 0 75px;
+    z-index: 1030;
+    .navbar-brand {
+        padding-top: 0;
+        border-bottom: none;
+    }
+    .nav-item {
+        &.active {
+            font-weight: 600;
+        }
+    }
+    .nav-link {
+        border-bottom: none;
+        font-size: 1.125rem;
+    }
+}

@@ -1,5 +1,5 @@
 <div class="card" style="margin: 15px 0;">
-    @if ($image)
+    @if ($image && !$repost)
         <img src="{{ $image }}" class="card-img-top" alt="{{ $name }}">
     @endif
     <div class="card-body">

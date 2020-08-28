@@ -3,7 +3,11 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
+use Illuminate\Support\Facades\Artisan;
+
 use App\VkPost as Post;
+use App\VkGroup;
+use App\VkUser;
 
 class VkPost extends Component
 {
@@ -32,12 +36,15 @@ class VkPost extends Component
      */
     public function render()
     {
-
         return view('components.vk-post');
     }
 
     protected function preparing($post)
     {
+        if (!is_object($post->from)) {
+            $post = $this->fresh($post);
+        }
+
         $this->id = $post->from->id;
         $this->name = $post->from->name;
         $this->screen_name = $post->from->screen_name;
@@ -87,5 +94,30 @@ class VkPost extends Component
             $post = Post::make($post->copy_history->get(0));
             $this->repost = new self($post);
         }
+    }
+
+    private function fresh($post)
+    {
+        $id = $post->getOriginal('from_id');
+        if (preg_match('/^\d+$/', $id)) {
+            // User
+            if (! VkUser::find($id)) {
+                Artisan::call('vk:get-users', [
+                    'ids' => $id,
+                    '--copy' => true
+                ]);
+            }
+        } else {
+            // Group
+            $id = trim($id, '-');
+            if (! VkGroup::find($id)) {
+                Artisan::call('vk:get-groups', [
+                    'ids' => $id,
+                    '--copy' => true
+                ]);
+            }
+        }
+
+       return $post->fresh();
     }
 }

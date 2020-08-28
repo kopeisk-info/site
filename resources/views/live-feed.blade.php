@@ -3,13 +3,22 @@
 @section('main')
     <div class="row">
         <div class="col-sx-12 col-lg-9">
-            <h2><a href="">Последние новости</a></h2>
+            <h1 class="h2">Прямой эфир</h1>
+            <div class="row row-cols-1 row-cols-md-3">
+                @foreach($posts as $post)
+                    <div class="col mb-4">
+                        <x-vk-post :post="$post"/>
+                    </div>
+                @endforeach
+            </div>
+
+            {{ $posts->onEachSide(1)->links() }}
         </div>
         <div class="col-sx-12 col-lg-3">
-            <div class="wall">
-                <h2><a href="{{ route('live_feed') }}" title="Перейти в раздел">Прямой эфир</a></h2>
-
-                {{--<div>Последние записи, оставленные на стенах личных аккаунтов служителей и церковных групп.</div>--}}
+            <div class="side sticky-top">
+                <div class="pb-4">
+                    Последние изменения в ленте<br> {{ $status->update_time->diffForHumans() }}
+                </div>
                 <div class="alert alert-warning" role="alert">
                     <div class="h5" style="color: #c00">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-alarm" fill="#c00" xmlns="http://www.w3.org/2000/svg" style="margin-top: -8px;">
@@ -23,12 +32,6 @@
                     Раздел состоит из записей социальных сетей, размещенных на стенах открытых аккаунтов служителей и церковных групп
                     Челябинской области, доступных для поисковых систем.
                 </div>
-
-                @foreach($posts as $post)
-                    <x-vk-post :post="$post"/>
-                @endforeach
-
-                <a href="{{ route('live_feed') }}" title="Перейти в раздел">Посмотреть все записи «Прямого эфира»</a>
             </div>
         </div>
     </div>

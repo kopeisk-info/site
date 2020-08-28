@@ -15,24 +15,32 @@
         <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     </head>
     <body>
-        <header class="header">
-            <div class="container">
-                <div class="logo">Копейск.Инфо</div>
-                Здесь будет логотип проекта и основное меню
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/root') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
+        <header class="header sticky-top">
+            <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #c00;">
+                <div class="container">
+                    <a class="navbar-brand" href="{{ route('root') }}"><b>Копейск.Инфо</b></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            {{--<li class="nav-item active">
+                                <a class="nav-link" href="{{ route('root') }}">Главная <span class="sr-only">(current)</span></a>
+                            </li>--}}
+                            @if (Route::has('news'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('news') }}">Новости</a>
+                                </li>
+                            @endif
+                            @if (Route::has('live_feed'))
+                                <li class="nav-item {{ Route::is('live_feed') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('live_feed') }}">Прямой эфир</a>
+                                </li>
+                            @endif
+                        </ul>
+                    </div>
                 </div>
-            @endif
-            </div>
+            </nav>
         </header>
 
         <main>
@@ -65,7 +73,7 @@
                             © Проект «{{ config('app.name') }}» – вестник пробуждения, 2020
                         </div>
                         <div class="footer-version">
-                            Версия Pre-Alpha <a href="https://github.com/kopeisk-info/site/releases" target="_blank" title="Последная версия на GitHub">0.0.1</a> ·
+                            Версия Pre-Alpha <a href="https://github.com/kopeisk-info/site/releases" target="_blank" title="Последная версия на GitHub">0.0.2</a> ·
                             <a href="https://vk.com/kopeisk_info?z=moneysend-100483740" target="_blank" title="Финансовая поддержка, спонсорство">Поддержать</a> или
                             <a href="" title="">стать участником</a> проекта
 {{--
@@ -81,8 +89,10 @@
 
         <script src="{{ mix('js/app.js') }}"></script>
 
+        @if (!in_array(request()->ip(), ['::1', '127.0.0.1', '217.64.134.223', '95.78.167.221']))
         <!-- Yandex.Metrika counter -->
         <script type="text/javascript" > (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}; m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)}) (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym"); ym(50408688, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, trackHash:true }); </script> <noscript><div><img src="https://mc.yandex.ru/watch/50408688" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
         <!-- /Yandex.Metrika counter -->
+        @endif
     </body>
 </html>

@@ -17,9 +17,7 @@ use App\Http\Resources\VkPostsResource;
 
 Route::get('/', 'IndexController@show')->name('root');
 
-Route::get('/', function () {
-    return view('live', ['posts' => App\VkPost::orderBy('date', 'DESC')->limit(30)->get()]);
-})->name('root');
+Route::get('/live-feed', 'LiveFeedController@index')->name('live_feed');
 
 Route::get('/catalog/minister', function () {
     // ...

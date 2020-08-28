@@ -3,6 +3,7 @@
 @import "~bootstrap/scss/bootstrap";
 @import "reboot";
 
+@import "header";
 @import "footer";
 
 .card-opacity {
@@ -19,3 +20,8 @@
     background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 75%);
     border-bottom: 5px solid #ffffff;
 }
+
+.side {
+    top: 10px;
+}
+
