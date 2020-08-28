@@ -50,6 +50,9 @@ class VkPost extends Component
 
         $this->from_link = "https://vk.com/{$this->screen_name}";
         $this->post_link = "{$this->from_link}?w=wall-{$this->id }_{$this->post_id}";
+        if ('VkUser' === class_basename($post->from)) {
+            $this->post_link = "{$this->from_link}?w=wall{$this->id }_{$this->post_id}";
+        }
 
         if ($post->attachments) {
             $attachment = current($post->attachments);
@@ -57,8 +60,8 @@ class VkPost extends Component
                 $key = array_search('x', array_column($attachment['photo']['sizes'], 'type'));
                 $this->image = $attachment['photo']['sizes'][$key]['url'];
             } elseif ('video' === $attachment['type']) {
-                $key = array_search('x', array_column($attachment['video']['image'], 'type'));
-                $this->image = $attachment['video']['image'][$key]['url'];
+                //$key = array_search('x', array_column($attachment['video']['image'], 'type'));
+                $this->image = $attachment['video']['image'][3]['url'];
             } elseif (('link' === $attachment['type']) && isset($attachment['link']['photo'])) {
                 $this->action = 'ссылка';
                 $key = array_search('x', array_column($attachment['link']['photo']['sizes'], 'type'));
