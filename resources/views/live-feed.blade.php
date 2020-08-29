@@ -4,6 +4,11 @@
     <div class="row">
         <div class="col-sx-12 col-lg-9">
             <h1 class="h2">Прямой эфир</h1>
+            @if(Route::is('live_feed.pastor'))
+                <div>Записи с аккаунтов пасторов</div>
+            @elseif(Route::is('live_feed.church'))
+                <div>Записи из церковных групп</div>
+            @endif
             <div class="row row-cols-1 row-cols-md-2 row-cols-xxl-3">
                 @foreach($posts as $post)
                     <div class="col mb-4">
