@@ -20,7 +20,7 @@ class CreateMinistersTable extends Migration
             $table->string('first_name');
             $table->string('middle_name')->nullable();
 
-            $table->text('description');
+            $table->text('description')->nullable();
 
             $table->string('city')->nullable()->comment('Город');
             $table->string('district')->nullable()->comment('Район города');
