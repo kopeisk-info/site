@@ -32,7 +32,7 @@
                         </div>
                         <div class="card-info" style="width: 100%; margin-left: 15px; overflow: hidden; text-overflow: ellipsis;">
                             <a href="{{ $repost->from_link }}" class="card-title" target="_blank" title="{{ $repost->name }}" style="white-space: nowrap;">{{ $repost->name }}</a>
-                            <div style="font-size: 13px; margin-top: 5px;">{{ $date->diffForHumans() }}{{ $action ? ', '. $action : '' }}</div>
+                            <div style="font-size: 13px; margin-top: 5px;">{{ $repost->date->diffForHumans() }}{{ $repost->action ? ', '. $repost->action : '' }}</div>
                         </div>
                     </div>
                     <p class="card-text" style="padding-top: 10px; font-size: 14px">{{ Str::limit($repost->text, 400) }}{{-- preg_replace('/\s+?(\S+)?$/', '', substr($repost->text . ' ', 0, 500)) --}}</p>

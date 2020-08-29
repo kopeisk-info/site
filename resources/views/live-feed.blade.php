@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-sx-12 col-lg-9">
             <h1 class="h2">Прямой эфир</h1>
-            <div class="row row-cols-1 row-cols-md-3">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-xxl-3">
                 @foreach($posts as $post)
                     <div class="col mb-4">
                         <x-vk-post :post="$post"/>
@@ -29,6 +29,7 @@
                             <path d="M7 1h2v2H7V1z"/>
                         </svg> Обратите внимание!
                     </div>
+                    {{--<div>Последние записи, оставленные на стенах личных аккаунтов служителей и церковных групп.</div>--}}
                     Раздел состоит из записей социальных сетей, размещенных на стенах открытых аккаунтов служителей и церковных групп
                     Челябинской области, доступных для поисковых систем.
                 </div>

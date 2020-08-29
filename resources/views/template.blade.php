@@ -28,7 +28,7 @@
                                 <a class="nav-link" href="{{ route('root') }}">Главная <span class="sr-only">(current)</span></a>
                             </li>--}}
                             @if (Route::has('news'))
-                                <li class="nav-item">
+                                <li class="nav-item {{ Route::is('news') ? 'active' : '' }}">
                                     <a class="nav-link" href="{{ route('news') }}">Новости</a>
                                 </li>
                             @endif

@@ -19,7 +19,7 @@ class LiveFeedController extends Controller
         ];
 
         return view('live-feed')
-            ->with('posts', $post->orderByDesc('date')->paginate(30))
+            ->with('posts', $post->orderByDesc('date')->paginate(18))
             ->with('status', (object) $status);
     }
 }
