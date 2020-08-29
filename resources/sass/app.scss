@@ -23,5 +23,14 @@
 
 .side {
     top: 10px;
+    .nav-item {
+        .active {
+            color: #c00;
+            border-bottom: 1px solid rgba(204,0,0,.3);
+        }
+    }
 }
 
+.text-justify {
+    text-align: justify;
+}

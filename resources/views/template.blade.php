@@ -28,29 +28,34 @@
                                 <a class="nav-link" href="{{ route('root') }}">Главная <span class="sr-only">(current)</span></a>
                             </li>--}}
                             @if (Route::has('news'))
-                                <li class="nav-item {{ Route::is('news') ? 'active' : '' }}">
+                                <li class="nav-item {{ Route::is('news*') ? 'active' : '' }}">
                                     <a class="nav-link" href="{{ route('news') }}">Новости</a>
                                 </li>
                             @endif
                             @if (Route::has('events'))
-                                <li class="nav-item {{ Route::is('events') ? 'active' : '' }}">
+                                <li class="nav-item {{ Route::is('events*') ? 'active' : '' }}">
                                     <a class="nav-link" href="{{ route('events') }}">События</a>
                                 </li>
                             @endif
                             @if (Route::has('live_feed'))
-                                <li class="nav-item {{ Route::is('live_feed') ? 'active' : '' }}">
+                                <li class="nav-item {{ Route::is('live_feed*') ? 'active' : '' }}">
                                     <a class="nav-link" href="{{ route('live_feed') }}">Прямой эфир</a>
                                 </li>
                             @endif
                             @if (Route::has('catalog'))
-                                <li class="nav-item {{ Route::is('catalog') ? 'active' : '' }}">
+                                <li class="nav-item {{ Route::is('catalog*') ? 'active' : '' }}">
                                     <a class="nav-link" href="{{ route('catalog') }}">Каталог церквей</a>
                                 </li>
                             @endif
                         </ul>
                         <ul class="navbar-nav">
-                            @if (Route::has('news'))
-                                <li class="nav-item {{ Route::is('about') ? 'active' : '' }}">
+                            @if (Route::has('repent'))
+                                <li class="nav-item {{ Route::is('repent*') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('repent') }}">Молитва покаяния</a>
+                                </li>
+                            @endif
+                            @if (Route::has('about'))
+                                <li class="nav-item {{ Route::is('about*') ? 'active' : '' }}">
                                     <a class="nav-link" href="{{ route('about') }}">О проекте</a>
                                 </li>
                             @endif

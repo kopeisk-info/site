@@ -33,6 +33,17 @@
                     Раздел состоит из записей социальных сетей, размещенных на стенах открытых аккаунтов служителей и церковных групп
                     Челябинской области, доступных для поисковых систем.
                 </div>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a {{ Route::is('live_feed') ? 'class=active aria-current=page' : '' }} href="{{ route('live_feed') }}"  title="Отобразить все записи">Все записи</a>
+                    </li>
+                    <li class="nav-item">
+                        <a {{ Route::is('live_feed.pastor') ? 'class=active aria-current=page' : '' }} href="{{ route('live_feed.pastor') }}" title="Отобразить только записи с аккаунтов пасторов">Записи с аккаунтов пасторов</a>
+                    </li>
+                    <li class="nav-item">
+                        <a {{ Route::is('live_feed.church') ? 'class=active aria-current=page' : '' }} href="{{ route('live_feed.church') }}" title="Отобразить только записи из церковных групп">Записи из церковных групп</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
