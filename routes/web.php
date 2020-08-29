@@ -17,12 +17,24 @@ use App\Http\Resources\VkPostsResource;
 
 Route::get('/', 'IndexController@show')->name('root');
 
+Route::resource('/news', 'NewsController')->only(['index', 'show'])->name('index', 'news');
+
 Route::get('/live-feed', 'LiveFeedController@index')->name('live_feed');
 
-Route::get('/catalog/minister', function () {
-    // ...
+Route::group(['prefix' => '/catalog'], function () {
+    Route::get('/', function () {
+        return view('catalog');
+    })->name('catalog');
+
+    Route::get('/minister', function () {
+        // ...
+    });
+
+    Route::get('/church', function () {
+        // ...
+    });
 });
 
-Route::get('/catalog/church', function () {
-    // ...
-});
+Route::get('/about', function () {
+    return view('about');
+})->name('about');

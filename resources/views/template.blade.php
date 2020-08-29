@@ -23,7 +23,7 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
+                        <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
                             {{--<li class="nav-item active">
                                 <a class="nav-link" href="{{ route('root') }}">Главная <span class="sr-only">(current)</span></a>
                             </li>--}}
@@ -35,6 +35,18 @@
                             @if (Route::has('live_feed'))
                                 <li class="nav-item {{ Route::is('live_feed') ? 'active' : '' }}">
                                     <a class="nav-link" href="{{ route('live_feed') }}">Прямой эфир</a>
+                                </li>
+                            @endif
+                            @if (Route::has('catalog'))
+                                <li class="nav-item {{ Route::is('catalog') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('catalog') }}">Каталог церквей</a>
+                                </li>
+                            @endif
+                        </ul>
+                        <ul class="navbar-nav">
+                            @if (Route::has('news'))
+                                <li class="nav-item {{ Route::is('about') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('about') }}">О проекте</a>
                                 </li>
                             @endif
                         </ul>
