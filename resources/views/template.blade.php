@@ -32,6 +32,11 @@
                                     <a class="nav-link" href="{{ route('news') }}">Новости</a>
                                 </li>
                             @endif
+                            @if (Route::has('events'))
+                                <li class="nav-item {{ Route::is('events') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('events') }}">События</a>
+                                </li>
+                            @endif
                             @if (Route::has('live_feed'))
                                 <li class="nav-item {{ Route::is('live_feed') ? 'active' : '' }}">
                                     <a class="nav-link" href="{{ route('live_feed') }}">Прямой эфир</a>

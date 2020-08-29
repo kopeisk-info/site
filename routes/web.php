@@ -19,6 +19,8 @@ Route::get('/', 'IndexController@show')->name('root');
 
 Route::resource('/news', 'NewsController')->only(['index', 'show'])->name('index', 'news');
 
+Route::resource('/events', 'EventsController')->only(['index', 'show'])->name('index', 'events');
+
 Route::get('/live-feed', 'LiveFeedController@index')->name('live_feed');
 
 Route::group(['prefix' => '/catalog'], function () {
