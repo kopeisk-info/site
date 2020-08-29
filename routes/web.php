@@ -39,13 +39,7 @@ Route::group(['prefix' => '/catalog'], function () {
     });
 });
 
-Route::get('/repent', function (VkUser $user) {
-    $user = $user->find(80955008);
-    return view('repent')
-        ->with('name', $user->name)
-        ->with('photo', $user->photo_50)
-        ->with('from_link', 'https://vk.com/'. $user->screen_name);
-})->name('repent');
+Route::get('/repent', 'RepentController@index')->name('repent');
 
 Route::get('/about', function () {
     return view('about');

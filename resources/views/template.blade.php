@@ -10,8 +10,11 @@
         <meta name="yandex-verification" content="bcc575eacccd4972">
 
         <title>@yield('title', config('app.name') .' – вестник пробуждения')</title>
+        <meta name="description" content="@yield('description', 'Проект освещает события грядущего пробуждения в Копейске.')">
 
+        <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=PT+Sans+Caption:400,700|PT+Sans+Narrow:400,700|PT+Sans:400,400i,700,700i&display=swap&subset=cyrillic" rel="stylesheet">
+
         <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     </head>
     <body>
