@@ -14,7 +14,7 @@ class VkUser extends Model
      */
     protected $fillable = [
         'id', 'first_name', 'last_name',
-        'is_closed', 'can_access_closed', 'from_copy',
+        'is_closed', 'can_access_closed', 'can_see_all_posts', 'from_copy',
         'sex', 'screen_name',
         'photo_50'
     ];

@@ -19,6 +19,7 @@ class CreateVkUsersTable extends Migration
             $table->string('last_name');
             $table->boolean('is_closed')->default(0);
             $table->boolean('can_access_closed')->default(0);
+            $table->boolean('can_see_all_posts')->default(1);
             $table->boolean('from_copy')->default(0);
             $table->smallInteger('sex');
             $table->string('screen_name')->nullable();

@@ -54,6 +54,7 @@ class GetUsers extends Command
                 'photo_50',
                 'screen_name',
                 'sex',
+                'can_see_all_posts'
             ],
             'user_ids' => $ids,
         ]);
