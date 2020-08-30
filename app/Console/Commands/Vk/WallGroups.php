@@ -39,7 +39,11 @@ class WallGroups extends Command
      */
     public function handle()
     {
-        $groups = VkGroup::where('from_copy', 0)->updateOlderThan(5)->orderBy('updated_at')->limit(20)->get();
+        $groups = VkGroup::where('from_copy', 0)
+            ->updateOlderThan(5)
+            ->orderBy('updated_at')
+            ->limit(50)
+            ->get();
 
         foreach ($groups->modelKeys() as $key => $id) {
             Artisan::call('vk:get-posts', [

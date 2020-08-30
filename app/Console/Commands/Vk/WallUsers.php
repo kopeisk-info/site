@@ -39,7 +39,12 @@ class WallUsers extends Command
      */
     public function handle()
     {
-        $users = VkUser::where('from_copy', 0)->updateOlderThan(5)->orderBy('updated_at')->limit(20)->get();
+        $users = VkUser::where('from_copy', 0)
+            ->where('can_see_all_posts', 1)
+            ->updateOlderThan(5)
+            ->orderBy('updated_at')
+            ->limit(50)
+            ->get();
 
         foreach ($users->modelKeys() as $key => $id) {
             Artisan::call('vk:get-posts', ['id' => $id]);
