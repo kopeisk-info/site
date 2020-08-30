@@ -40,7 +40,6 @@ class WallGroups extends Command
     public function handle()
     {
         $groups = VkGroup::where('from_copy', 0)
-            ->where('can_see_all_posts', 1)
             ->updateOlderThan(5)
             ->orderBy('updated_at')
             ->limit(50)
