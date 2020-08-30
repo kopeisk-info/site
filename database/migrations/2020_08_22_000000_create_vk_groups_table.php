@@ -18,6 +18,7 @@ class CreateVkGroupsTable extends Migration
             $table->string('name');
             $table->string('screen_name')->nullable();
             $table->boolean('is_closed')->default(0);
+            $table->boolean('can_see_all_posts')->default(1);
             $table->boolean('from_copy')->default(0);
             $table->string('type');
             $table->string('photo_50');

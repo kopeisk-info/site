@@ -2,6 +2,8 @@
 namespace App\Console\Commands\Vk;
 
 use Illuminate\Console\Command;
+use http\Exception\RuntimeException;
+use Illuminate\Support\Facades\Log;
 
 use VK\Client\VKApiClient;
 use App\VkPost;
@@ -41,19 +43,22 @@ class GetPosts extends Command
     {
         if ($id = $this->argument('id')) {
             $vk = new VKApiClient();
+            try {
+                $response = $vk->wall()->get(env('VK_SERVICE_KEY'), [
+                    'lang' => 'ru',
+                    'owner_id'  => $this->option('group') ? "-$id" : $id,
+                    'filter' => 'all',
+                ]);
 
-            $response = $vk->wall()->get(env('VK_SERVICE_KEY'), [
-                'lang' => 'ru',
-                'owner_id'  => $this->option('group') ? "-$id" : $id,
-                'filter' => 'all',
-            ]);
-
-            foreach($response['items'] as $item) {
-                VkPost::updateOrCreate([
-                    'owner_id' => $item['owner_id'],
-                    'id' => $item['id']
-                ], $item);
-            };
+                foreach($response['items'] as $item) {
+                    VkPost::updateOrCreate([
+                        'owner_id' => $item['owner_id'],
+                        'id' => $item['id']
+                    ], $item);
+                };
+            } catch (RuntimeException $exception) {
+                Log::info('Ошибка загрузки id '. $id);
+            }
         }
     }
 }

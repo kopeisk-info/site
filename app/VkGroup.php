@@ -14,7 +14,8 @@ class VkGroup extends Model
      */
     protected $fillable = [
         'id', 'name', 'screen_name',
-        'is_closed', 'from_copy', 'type',
+        'is_closed', 'can_see_all_posts',
+        'from_copy', 'type',
         'photo_50'
     ];
 
