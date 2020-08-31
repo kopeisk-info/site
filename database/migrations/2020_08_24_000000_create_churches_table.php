@@ -43,7 +43,7 @@ class CreateChurchesTable extends Migration
             $table->string('main_site')->nullable()->comment('Основной сайт');
             $table->string('contact_phone')->nullable()->comment('Контактный номер телефона');
 
-            $table->unsignedBigInteger('parent')->nullable();
+            $table->foreignId('parent_id')->references('id')->on('churches')->onDelete('cascade');
 
             $table->timestamps();
         });
