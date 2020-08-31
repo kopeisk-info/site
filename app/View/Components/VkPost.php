@@ -64,15 +64,19 @@ class VkPost extends Component
         if ($post->attachments) {
             $attachment = current($post->attachments);
             if ('photo' === $attachment['type']) {
-                $key = array_search('x', array_column($attachment['photo']['sizes'], 'type'));
-                $this->image = $attachment['photo']['sizes'][$key]['url'];
+                if ($url = $this->getImageUrl($attachment['photo']['sizes'])) {
+                    $this->image = $url;
+                }
             } elseif ('video' === $attachment['type']) {
-                //$key = array_search('x', array_column($attachment['video']['image'], 'type'));
-                $this->image = $attachment['video']['image'][3]['url'];
+                $this->action = 'видео';
+                if ($url = $this->getImageUrl($attachment['video']['image'])) {
+                    $this->image = $url;
+                }
             } elseif (('link' === $attachment['type']) && isset($attachment['link']['photo'])) {
                 $this->action = 'ссылка';
-                $key = array_search('x', array_column($attachment['link']['photo']['sizes'], 'type'));
-                $this->image = $attachment['link']['photo']['sizes'][$key]['url'];
+                if ($url = $this->getImageUrl($attachment['link']['photo']['sizes'])) {
+                    $this->image = $url;
+                }
             }
         }
 
@@ -119,5 +123,22 @@ class VkPost extends Component
         }
 
        return $post->fresh();
+    }
+
+    private function getImageUrl($sizes) {
+        $sizes = array_filter($sizes, function($val) {
+            if (
+                (isset($val['type']) && !in_array($val['type'], ['l', 'x', 'y', 'z'])) ||
+                isset($val['with_padding']) ||
+                $val['width'] < 320
+            ) {
+                return false;
+            }
+            return true;
+        });
+        if ($size = current($sizes)) {
+            return $size['url'];
+        }
+        return false;
     }
 }

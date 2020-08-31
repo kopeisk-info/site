@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Minister extends Model
+class Church extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,10 +12,12 @@ class Minister extends Model
      * @var array
      */
     protected $fillable = [
-        'last_name', 'first_name', 'middle_name',
-        'description',
+        'type', 'scope',
+        'name', 'full_name', 'description',
         'city', 'district',
-        'phone', 'email'
+        'foundation_date', 'registration_date',
+        'main_site', 'contact_phone',
+        'parent_id'
     ];
 
     /**
@@ -33,10 +35,11 @@ class Minister extends Model
      * @var array
      */
     protected $casts = [
-        // ...
+        'foundation_date' => 'datetime',
+        'registration_date' => 'datetime',
     ];
 
-    public function churchs()
+    public function ministers()
     {
         return $this->belongsToMany('App\Minister', 'church_ministers');
     }

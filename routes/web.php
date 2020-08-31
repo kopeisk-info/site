@@ -27,16 +27,17 @@ Route::get('/live-feed/church', 'LiveFeedController@church')->name('live_feed.ch
 
 Route::group(['prefix' => '/catalog'], function () {
     Route::get('/', function () {
-        return view('catalog');
+        $churchs = App\Church::all();
+        return view('catalog', ['churchs' => $churchs]);
     })->name('catalog');
 
     Route::get('/minister', function () {
         // ...
     });
 
-    Route::get('/church', function () {
-        // ...
-    });
+    //Route::get('/church', function () {
+    //    // ...
+    //});
 });
 
 Route::get('/repent', 'RepentController@index')->name('repent');
