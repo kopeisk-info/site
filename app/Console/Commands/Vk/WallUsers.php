@@ -43,7 +43,7 @@ class WallUsers extends Command
             ->where('can_see_all_posts', 1)
             ->updateOlderThan(5)
             ->orderBy('updated_at')
-            ->limit(50)
+            ->limit(100)
             ->get();
 
         foreach ($users->modelKeys() as $key => $id) {

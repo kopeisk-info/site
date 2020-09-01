@@ -42,7 +42,7 @@ class WallGroups extends Command
         $groups = VkGroup::where('from_copy', 0)
             ->updateOlderThan(5)
             ->orderBy('updated_at')
-            ->limit(50)
+            ->limit(100)
             ->get();
 
         foreach ($groups->modelKeys() as $key => $id) {
