@@ -1,19 +1,43 @@
 <div class="card" style="margin: 15px 0;">
     @if ($image && !$repost)
-        <img src="{{ $image }}" class="card-img-top" alt="{{ $name }}">
+        <img src="{{ $image }}" class="card-img-top" alt="{{ $owner_name }}">
     @endif
     <div class="card-body">
+        @if ($from_id)
+            <div class="d-flex justify-content-start">
+                <div class="card-photo">
+                    <a href="{{ $owner_link }}" class="card-title" target="_blank" title="{{ $owner_name }}">
+                        <img src="{{ $owner_photo }}" alt="{{ $owner_name }}" class="rounded-circle">
+                    </a>
+                </div>
+                <div class="card-info" style="width: 100%; margin-left: 15px; overflow: hidden; text-overflow: ellipsis;">
+                    <a href="{{ $owner_link }}" class="card-title" target="_blank" title="{{ $owner_name }}" style="white-space: nowrap;">{{ $owner_name }}</a>
+                    <div class="d-flex justify-content-start mt-3">
+                        <div class="card-photo pt-2">
+                            <a href="{{ $from_link }}" class="card-title" target="_blank" title="{{ $from_name }}">
+                                <img src="{{ $from_photo }}" alt="{{ $from_name }}" class="rounded-circle" style="width: 30px">
+                            </a>
+                        </div>
+                        <div class="card-info" style="width: 100%; margin-left: 15px; overflow: hidden; text-overflow: ellipsis;">
+                            <a href="{{ $from_link }}" class="card-title" target="_blank" title="{{ $from_name }}" style="white-space: nowrap;">{{ $from_name }}</a>
+                            <div style="font-size: 13px;">{{ $date->diffForHumans() }}{{ $action ? ' '. $action : '' }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @else
         <div class="d-flex justify-content-start">
             <div class="card-photo">
-                <a href="{{ $from_link }}" class="card-title" target="_blank" title="{{ $name }}">
-                    <img src="{{ $photo }}" alt="{{ $name }}" class="rounded-circle">
+                <a href="{{ $owner_link }}" class="card-title" target="_blank" title="{{ $owner_name }}">
+                    <img src="{{ $owner_photo }}" alt="{{ $owner_name }}" class="rounded-circle">
                 </a>
             </div>
             <div class="card-info" style="width: 100%; margin-left: 15px; overflow: hidden; text-overflow: ellipsis;">
-                <a href="{{ $from_link }}" class="card-title" target="_blank" title="{{ $name }}" style="white-space: nowrap;">{{ $name }}</a>
+                <a href="{{ $owner_link }}" class="card-title" target="_blank" title="{{ $owner_name }}" style="white-space: nowrap;">{{ $owner_name }}</a>
                 <div style="font-size: 13px; margin-top: 5px;">{{ $date->diffForHumans() }}{{ $action ? ', '. $action : '' }}</div>
             </div>
         </div>
+        @endif
         <p class="card-text" style="padding-top: 10px;">{{ Str::limit($text, 400) }}{{-- preg_replace('/\s+?(\S+)?$/', '', substr($text . ' ', 0, 500)) --}}</p>
         @if(400 < Str::length($text))
             <div class="card-opacity"></div>
@@ -21,17 +45,17 @@
         @if ($repost)
             <div class="card" style="margin: 15px 0;">
                 @if ($repost->image)
-                    <img src="{{ $repost->image }}" class="card-img-top" alt="{{ $repost->name }}">
+                    <img src="{{ $repost->image }}" class="card-img-top" alt="{{ $repost->owner_name }}">
                 @endif
                 <div class="card-body">
                     <div class="d-flex justify-content-start">
                         <div class="card-photo">
-                            <a href="{{ $repost->from_link }}" class="card-title" target="_blank" title="{{ $repost->name }}">
-                                <img src="{{ $repost->photo }}" alt="{{ $repost->name }}" class="rounded-circle">
+                            <a href="{{ $repost->owner_link }}" class="card-title" target="_blank" title="{{ $repost->owner_name }}">
+                                <img src="{{ $repost->owner_photo }}" alt="{{ $repost->owner_name }}" class="rounded-circle">
                             </a>
                         </div>
                         <div class="card-info" style="width: 100%; margin-left: 15px; overflow: hidden; text-overflow: ellipsis;">
-                            <a href="{{ $repost->from_link }}" class="card-title" target="_blank" title="{{ $repost->name }}" style="white-space: nowrap;">{{ $repost->name }}</a>
+                            <a href="{{ $repost->owner_link }}" class="card-title" target="_blank" title="{{ $repost->owner_name }}" style="white-space: nowrap;">{{ $repost->owner_name }}</a>
                             <div style="font-size: 13px; margin-top: 5px;">{{ $repost->date->diffForHumans() }}{{ $repost->action ? ', '. $repost->action : '' }}</div>
                         </div>
                     </div>

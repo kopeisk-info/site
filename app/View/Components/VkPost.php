@@ -11,10 +11,10 @@ use App\VkUser;
 
 class VkPost extends Component
 {
-    public $id, $name, $screen_name, $photo,
-        $post_id, $post_type,
-        $date, $text, $image,
-        $action, $from_link, $post_link,
+    public $owner_id, $owner_name, $owner_screen_name, $owner_photo, $owner_link,
+        $from_id, $from_name, $from_screen_name, $from_photo, $from_link,
+        $post_id, $post_type, $post_link,
+        $date, $text, $image, $action,
         $comments, $likes, $reposts = 0, $views = 0;
 
     public $repost;
@@ -45,25 +45,36 @@ class VkPost extends Component
             $post = $this->fresh($post);
         }
 
-        $this->id = $post->from->id;
-        $this->name = $post->from->name;
-        $this->screen_name = $post->from->screen_name;
-        $this->photo = $post->from->photo_50;
+        $this->owner_id = $post->owner->id;
+        $this->owner_name = $post->owner->name;
+        $this->owner_screen_name = $post->owner->screen_name;
+        $this->owner_photo = $post->owner->photo_50;
+        $this->owner_link = "https://vk.com/{$this->owner_screen_name}";
+
+        if ($post->owner->id !== $post->from->id) {
+            $this->from_id = $post->from->id;
+            $this->from_name = $post->from->name;
+            $this->from_screen_name = $post->from->screen_name;
+            $this->from_photo = $post->from->photo_50;
+            $this->from_link = "https://vk.com/{$this->from_screen_name}";
+            $this->action = $post->from->sex > 1 ? ' написал' : 'написалa';
+        }
 
         $this->post_id = $post->id;
         $this->post_type = $post->post_type;
         $this->date = $post->date;
         $this->text = $post->text;
 
-        $this->from_link = "https://vk.com/{$this->screen_name}";
-        $this->post_link = "{$this->from_link}?w=wall-{$this->id }_{$this->post_id}";
-        if ('VkUser' === class_basename($post->from)) {
-            $this->post_link = "{$this->from_link}?w=wall{$this->id }_{$this->post_id}";
+        $this->post_link = "{$this->owner_link}?w=wall-{$this->owner_id }_{$this->post_id}";
+        if ('VkUser' === class_basename($post->owner)) {
+            $this->post_link = "{$this->owner_link}?w=wall{$this->owner_id }_{$this->post_id}";
         }
-
         if ($post->attachments) {
             $attachment = current($post->attachments);
             if ('photo' === $attachment['type']) {
+                if (($count = count($post->attachments)) > 1) {
+                    $this->action = $count .' '. trans_choice('вложение|вложения|вложений', $count);
+                }
                 if ($url = $this->getImageUrl($attachment['photo']['sizes'])) {
                     $this->image = $url;
                 }
@@ -127,18 +138,20 @@ class VkPost extends Component
 
     private function getImageUrl($sizes) {
         $sizes = array_filter($sizes, function($val) {
-            if (
-                (isset($val['type']) && !in_array($val['type'], ['l', 'x', 'y', 'z'])) ||
-                isset($val['with_padding']) ||
-                $val['width'] < 320
-            ) {
-                return false;
+            if ((isset($val['type']) && in_array($val['type'], ['l', 'x', 'y', 'z'])) || $val['width'] >= 320) {
+                return true;
             }
-            return true;
         });
+        $sizes = array_merge(array_filter($sizes, function($val) {
+            if (!isset($val['with_padding'])) {
+                return true;
+            }
+        }), $sizes);
+
         if ($size = current($sizes)) {
             return $size['url'];
         }
+
         return false;
     }
 }
