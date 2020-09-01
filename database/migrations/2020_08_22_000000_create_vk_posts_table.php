@@ -32,6 +32,16 @@ class CreateVkPostsTable extends Migration
             $table->softDeletes();
 
             $table->unique(['id', 'owner_id'], 'uuid');
+
+            $table->foreign('owner_id', 'owner_id_user_id')
+                ->references('user_id')
+                ->on('vk_users')
+                ->onDelete('cascade');
+
+            $table->foreign('owner_id', 'owner_id_group_id')
+                ->references('group_id')
+                ->on('vk_groups')
+                ->onDelete('cascade');
         });
     }
 

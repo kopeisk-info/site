@@ -48,6 +48,10 @@ class GetGroups extends Command
             $ids = $collection->modelKeys();
         }
 
+        $ids = array_map(function($val){
+            return abs($val);
+        }, $ids);
+
         $response = $vk->groups()->getById(env('VK_SERVICE_KEY'), [
             'lang' => 'ru',
             'group_ids'  => $ids,
@@ -60,7 +64,6 @@ class GetGroups extends Command
             if ($this->option('copy')) {
                 $item['from_copy'] = true;
             }
-
             VkGroup::updateOrCreate(['id' => $item['id']], $item);
         }
     }

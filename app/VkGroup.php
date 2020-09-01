@@ -25,7 +25,7 @@ class VkGroup extends Model
      * @var array
      */
     protected $hidden = [
-        // ...
+        'group_id'
     ];
 
     /**
@@ -40,5 +40,18 @@ class VkGroup extends Model
     public function scopeUpdateOlderThan($query, $interval)
     {
         return $query->where('updated_at', '<=', Carbon::now()->subMinutes($interval)->toDateTimeString());
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function($model) {
+            $model->group_id = '-'. abs($model->id);
+        });
+
+        static::updating(function($model) {
+            $model->group_id = '-'. abs($model->id);
+        });
     }
 }

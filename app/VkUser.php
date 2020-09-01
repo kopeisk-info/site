@@ -25,7 +25,7 @@ class VkUser extends Model
      * @var array
      */
     protected $hidden = [
-        // ...
+        'user_id'
     ];
 
     /**
@@ -45,5 +45,18 @@ class VkUser extends Model
     public function getNameAttribute()
     {
         return "{$this->first_name} {$this->last_name}";
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function($model) {
+            $model->user_id = abs($model->id);
+        });
+
+        static::updating(function($model) {
+            $model->user_id = abs($model->id);
+        });
     }
 }

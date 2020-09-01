@@ -15,6 +15,7 @@ class CreateVkUsersTable extends Migration
     {
         Schema::create('vk_users', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('user_id')->unique();
             $table->string('first_name');
             $table->string('last_name');
             $table->boolean('is_closed')->default(0);
