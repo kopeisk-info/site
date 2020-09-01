@@ -19,7 +19,7 @@ class LiveFeedController extends Controller
         ];
 
         return view('live-feed')
-            ->with('posts', $post->orderByDesc('date')->paginate(18))
+            ->with('posts', $post->withoutTrashed()->orderByDesc('date')->paginate(18))
             ->with('status', (object) $status);
     }
 
@@ -32,7 +32,7 @@ class LiveFeedController extends Controller
         ];
 
         return view('live-feed')
-            ->with('posts', $post->where('from_id', '>', 0)->orderByDesc('date')->paginate(18))
+            ->with('posts', $post->withoutTrashed()->where('from_id', '>', 0)->orderByDesc('date')->paginate(18))
             ->with('status', (object) $status);
     }
 
@@ -45,7 +45,7 @@ class LiveFeedController extends Controller
         ];
 
         return view('live-feed')
-            ->with('posts', $post->where('from_id', '<', 0)->orderByDesc('date')->paginate(18))
+            ->with('posts', $post->withoutTrashed()->where('from_id', '<', 0)->orderByDesc('date')->paginate(18))
             ->with('status', (object) $status);
     }
 }
