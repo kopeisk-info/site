@@ -3,10 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 use Illuminate\Support\Facades\Artisan;
 
 class VkPost extends Model
 {
+    use SoftDeletes;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -59,6 +63,16 @@ class VkPost extends Model
         if (!preg_match('/^\d+$/', $this->from_id)) {
             $this->attributes['from_id'] = trim($this->attributes['from_id'], '-');
             $relation = $this->hasOne('App\VkGroup', 'id', 'from_id');
+        }
+        return $relation;
+    }
+
+    public function owner()
+    {
+        $relation = $this->hasOne('App\VkUser', 'id', 'owner_id');
+        if (!preg_match('/^\d+$/', $this->owner_id)) {
+            $this->attributes['owner_id'] = trim($this->attributes['owner_id'], '-');
+            $relation = $this->hasOne('App\VkGroup', 'id', 'owner_id');
         }
         return $relation;
     }

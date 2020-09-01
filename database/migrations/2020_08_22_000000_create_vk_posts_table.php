@@ -29,6 +29,7 @@ class CreateVkPostsTable extends Migration
             $table->json('reposts')->nullable();
             $table->json('views')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unique(['id', 'owner_id'], 'uuid');
         });

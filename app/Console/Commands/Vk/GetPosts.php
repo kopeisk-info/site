@@ -56,6 +56,15 @@ class GetPosts extends Command
                         'id' => $item['id']
                     ], $item);
                 };
+
+                $keys = array_reverse(array_column($response['items'], 'id'));
+                $posts = VkPost::where('owner_id', $item['owner_id'])
+                    ->whereNotIn('id', $keys)
+                    ->whereBetween('id', [current($keys), end($keys)])
+                    ->get();
+                foreach ($posts as $post) {
+                    $post->delete();
+                }
             } catch (RuntimeException $exception) {
                 Log::info('Ошибка загрузки id '. $id);
             }
