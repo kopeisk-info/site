@@ -80,53 +80,11 @@ class VkPost extends Model
         parent::boot();
 
         static::creating(function($model) {
-            if (!empty($model->copy_history)) {
-                foreach ($model->copy_history as $item) {
-                    $id = $item['from_id'];
-                    if (preg_match('/^\d+$/', $id)) {
-                        // User
-                        if (! VkUser::find($id)) {
-                            Artisan::call('vk:get-users', [
-                                'ids' => $id,
-                                '--copy' => true
-                            ]);
-                        }
-                    } else {
-                        // Group
-                        if (! VkGroup::find(abs($id))) {
-                            Artisan::call('vk:get-groups', [
-                                'ids' => abs($id),
-                                '--copy' => true
-                            ]);
-                        }
-                    }
-                }
-            }
+            // ...
         });
 
         static::updating(function($model) {
-            if (!empty($model->copy_history)) {
-                foreach ($model->copy_history as $item) {
-                    $id = $item['from_id'];
-                    if (preg_match('/^\d+$/', $id)) {
-                        // User
-                        if (! VkUser::find($id)) {
-                            Artisan::call('vk:get-users', [
-                                'ids' => $id,
-                                '--copy' => true
-                            ]);
-                        }
-                    } else {
-                        // Group
-                        if (! VkGroup::find(abs($id))) {
-                            Artisan::call('vk:get-groups', [
-                                'ids' => abs($id),
-                                '--copy' => true
-                            ]);
-                        }
-                    }
-                }
-            }
+            // ...
         });
     }
 }

@@ -2,8 +2,6 @@
 namespace App\Console\Commands\Vk;
 
 use Illuminate\Console\Command;
-use http\Exception\RuntimeException;
-use Illuminate\Support\Facades\Log;
 
 use VK\Client\VKApiClient;
 use App\VkUser;
@@ -12,16 +10,17 @@ use App\VkPost;
 
 class GetPosts extends Command
 {
-    private $profiles = [];
-    private $groups = [];
-    private $posts = [];
+    private $id;
+    private $profiles;
+    private $groups;
+    private $posts;
 
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'vk:get-posts {id} {--group}';
+    protected $signature = 'vk:get-posts {id} {--G|group} {--count=20} {--offset=0}';
 
     /**
      * The console command description.
@@ -47,16 +46,17 @@ class GetPosts extends Command
      */
     public function handle()
     {
-        $id = $this->argument('id');
+        $this->id = $this->argument('id');
 
         // Получаем записи со служебной информацией
         $vk = new VKApiClient();
         $response = $vk->wall()->get(env('VK_SERVICE_KEY'), [
             'lang' => 'ru',
-            'owner_id'  => $this->option('group') ? '-'. $id : $id,
+            'owner_id'  => $this->option('group') ? '-'. $this->id : $this->id,
             'extended' => 1,
             'filter' => 'all',
-            'count' => 10
+            'count' => $this->option('count'),
+            'offset' => $this->option('offset')
         ]);
 
         $this->posts = $response['items'];
@@ -69,8 +69,8 @@ class GetPosts extends Command
         $ids = array_diff($profileIds , $profiles->modelKeys());
         foreach ($ids as $key => $id) {
             $data = $this->profiles[$key];
-            $data['from_copy'] = 1;
-            VkUser::updateOrCreate(['id' => $id], $data);
+            $data['from_copy'] = $this->id != $id;
+            VkUser::create($data);
         }
 
         // Добавление отсутсвующих зависимостей(группы)
@@ -80,36 +80,24 @@ class GetPosts extends Command
         foreach ($ids as $key => $id) {
             $data = $this->groups[$key];
             $data['from_copy'] = 1;
-            VkGroup::updateOrCreate(['id' => $id], $data);
+            VkGroup::create($data);
         }
-        dd();
 
-        if ($this->items = $response['items']) {
-            $ids = array_merge(
-                array_column($response['items'], 'from_id'),
-                array_column($response['items'], 'owner_id')
-            );
-            $ids = array_unique($ids);
+        // Добавление или обновление постов
+        foreach($this->posts as $post) {
+            VkPost::updateOrCreate([
+                'owner_id' => $post['owner_id'], 'id' => $post['id']
+            ], $post);
+        }
 
-            foreach($ids as $id) {
-                $id < 0 ? array_push($this->groups, $id) : array_push($this->users, $id);
-            }
-
-            /*foreach($response['items'] as $item) {
-                VkPost::updateOrCreate([
-                    'owner_id' => $item['owner_id'],
-                    'id' => $item['id']
-                ], $item);
-            };
-
-            $keys = array_reverse(array_column($response['items'], 'id'));
-            $posts = VkPost::where('owner_id', $item['owner_id'])
-                ->whereNotIn('id', $keys)
-                ->whereBetween('id', [current($keys), end($keys)])
-                ->get();
-            foreach ($posts as $post) {
-                $post->delete();
-            }*/
+        // Удаление отсуствующих постов
+        $ids = array_reverse(array_column($this->posts, 'id'));
+        $posts = VkPost::where('owner_id', $post['owner_id'])
+            ->whereNotIn('id', $ids)
+            ->whereBetween('id', [current($ids), end($ids)])
+            ->get();
+        foreach ($posts as $post) {
+            $post->delete();
         }
     }
 }
