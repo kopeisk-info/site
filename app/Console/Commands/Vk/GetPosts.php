@@ -10,17 +10,17 @@ use App\VkPost;
 
 class GetPosts extends Command
 {
-    private $id;
-    private $profiles;
-    private $groups;
-    private $posts;
+    protected $id;
+    protected $profiles;
+    protected $groups;
+    protected $posts;
 
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'vk:get-posts {id} {--G|group} {--count=20} {--offset=0}';
+    protected $signature = 'vk:get-posts {id} {--group} {--count=20} {--offset=0}';
 
     /**
      * The console command description.
@@ -47,7 +47,6 @@ class GetPosts extends Command
     public function handle()
     {
         $this->id = $this->argument('id');
-
         // Получаем записи со служебной информацией
         $vk = new VKApiClient();
         $response = $vk->wall()->get(env('VK_SERVICE_KEY'), [
@@ -92,7 +91,7 @@ class GetPosts extends Command
 
         // Удаление отсуствующих постов
         $ids = array_reverse(array_column($this->posts, 'id'));
-        $posts = VkPost::where('owner_id', $post['owner_id'])
+        $posts = VkPost::where('owner_id', $this->id)
             ->whereNotIn('id', $ids)
             ->whereBetween('id', [current($ids), end($ids)])
             ->get();
