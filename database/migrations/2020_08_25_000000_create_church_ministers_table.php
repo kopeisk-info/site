@@ -14,14 +14,21 @@ class CreateChurchMinistersTable extends Migration
     public function up()
     {
         Schema::create('church_ministers', function (Blueprint $table) {
-            $table->id();
-
-            $table->foreignId('church_id')->references('id')->on('churches')->onDelete('cascade');
-            $table->foreignId('minister_id')->references('id')->on('ministers')->onDelete('cascade');
-
+            $table->unsignedBigInteger('church_id');
+            $table->unsignedBigInteger('minister_id');
             $table->string('ordination');
 
-            $table->timestamps();
+            $table->unique(['church_id', 'minister_id'], 'id');
+            $table->index('ordination');
+            $table->index('church_id');
+            $table->index('minister_id');
+
+            $table->foreign('church_id')
+                ->references('id')->on('churches')
+                ->onDelete('cascade');
+            $table->foreign('minister_id')
+                ->references('id')->on('ministers')
+                ->onDelete('cascade');
         });
     }
 

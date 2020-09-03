@@ -15,7 +15,7 @@ class CreateMeetingsTable extends Migration
     {
         Schema::create('meetings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('church_id')->references('id')->on('churches')->onDelete('cascade');
+            $table->unsignedBigInteger('church_id');
 
             $table->string('name');
             $table->text('description');
@@ -28,6 +28,10 @@ class CreateMeetingsTable extends Migration
             $table->time('time');
 
             $table->timestamps();
+
+            $table->foreign('church_id')
+                ->references('id')->on('churches')
+                ->onDelete('cascade');
         });
     }
 
