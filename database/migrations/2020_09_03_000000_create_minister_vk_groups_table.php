@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRepentsTable extends Migration
+class CreateMinisterVkGroupsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,19 @@ class CreateRepentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('repents', function (Blueprint $table) {
-            $table->id();
+        Schema::create('minister_vk_groups', function (Blueprint $table) {
             $table->unsignedBigInteger('minister_id');
-            $table->text('prayer');
-            $table->timestamps();
+            $table->unsignedBigInteger('group_id');
+
+            $table->unique(['minister_id', 'group_id'], 'id');
+            $table->index('minister_id');
+            $table->index('group_id');
 
             $table->foreign('minister_id')
                 ->references('id')->on('ministers')
+                ->onDelete('cascade');
+            $table->foreign('group_id')
+                ->references('id')->on('vk_groups')
                 ->onDelete('cascade');
         });
     }
@@ -32,6 +37,6 @@ class CreateRepentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('repents');
+        Schema::dropIfExists('minister_vk_groups');
     }
 }

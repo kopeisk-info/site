@@ -15,7 +15,7 @@ class CreateChurchesTable extends Migration
     {
         Schema::create('churches', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('parent_id');
+            $table->unsignedBigInteger('parent_id')->nullable();
             /*
              * Как вариант:
              * group - религиозная группа
@@ -48,7 +48,7 @@ class CreateChurchesTable extends Migration
 
             $table->foreign('parent_id')
                 ->references('id')->on('churches')
-                ->onDelete('cascade');
+                ->onDelete('set null');
         });
     }
 

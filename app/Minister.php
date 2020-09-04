@@ -36,8 +36,28 @@ class Minister extends Model
         // ...
     ];
 
+    public function getNameAttribute()
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
+
     public function churchs()
     {
         return $this->belongsToMany('App\Minister', 'church_ministers');
+    }
+
+    public function ordination()
+    {
+        return $this->hasOne('App\ChurchMinister');
+    }
+
+    public function vk_users()
+    {
+        return $this->belongsToMany('App\VkUser', 'minister_vk_users');
+    }
+
+    public function vk_groups()
+    {
+        return $this->belongsToMany('App\VkGroups', 'minister_vk_groups');
     }
 }

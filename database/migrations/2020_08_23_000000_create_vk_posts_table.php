@@ -14,7 +14,7 @@ class CreateVkPostsTable extends Migration
     public function up()
     {
         Schema::create('vk_posts', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedBigInteger('id');
             $table->bigInteger('from_id');
             $table->bigInteger('owner_id');
             $table->dateTime('date');
