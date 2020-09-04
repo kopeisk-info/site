@@ -68,7 +68,6 @@ class GetPosts extends Command
         $ids = array_diff($profileIds , $profiles->modelKeys());
         foreach ($ids as $key => $id) {
             $data = $this->profiles[$key];
-            $data['from_copy'] = $this->id != $id;
             VkUser::create($data);
         }
 
@@ -78,7 +77,6 @@ class GetPosts extends Command
         $ids = array_diff($groupIds , $groups->modelKeys());
         foreach ($ids as $key => $id) {
             $data = $this->groups[$key];
-            $data['from_copy'] = 1;
             VkGroup::create($data);
         }
 

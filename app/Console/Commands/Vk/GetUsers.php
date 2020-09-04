@@ -60,10 +60,6 @@ class GetUsers extends Command
         ]);
 
         foreach ($response as $item) {
-            if ($this->option('copy')) {
-                $item['from_copy'] = true;
-            }
-
             VkUser::updateOrCreate(['id' => $item['id']], $item);
         }
     }
