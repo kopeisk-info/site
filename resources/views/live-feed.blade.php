@@ -26,7 +26,7 @@
         <div class="col-sx-12 col-lg-3">
             <div class="side sticky-top">
                 <div class="pb-4">
-                    Последние изменения в ленте<br> {{ $status->update_time->diffForHumans() }}
+                    Последние изменения в ленте<br> {{ $status->update_time ? $status->update_time->diffForHumans() : '' }}
                 </div>
                 <div class="alert alert-warning" role="alert">
                     <div class="h5" style="color: #c00">

@@ -14,6 +14,11 @@
                         @if ($church->registration_date)
                             <div>Зарегистрирована {{ $church->registration_date->translatedFormat('j F Y') }}</div>
                         @endif
+                        @if ($ministers = $church->ministers)
+                            @foreach ($ministers as $minister)
+                                <div>{{ $minister->ordination->ordination }} — {{ $minister->name }}</div>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
             @endforeach
