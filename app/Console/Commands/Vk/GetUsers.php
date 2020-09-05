@@ -13,7 +13,7 @@ class GetUsers extends Command
      *
      * @var string
      */
-    protected $signature = 'vk:get-users {ids?} {--copy}';
+    protected $signature = 'vk:get-users {ids?}';
 
     /**
      * The console command description.
