@@ -19,7 +19,7 @@ Route::get('/', 'IndexController@show')->name('root');
 
 Route::resource('/news', 'NewsController')->only(['index', 'show'])->name('index', 'news');
 
-Route::resource('/events', 'EventsController')->only(['index', 'show'])->name('index', 'events');
+//Route::resource('/events', 'EventsController')->only(['index', 'show'])->name('index', 'events');
 
 Route::get('/live-feed', 'LiveFeedController@index')->name('live_feed');
 Route::get('/live-feed/pastor', 'LiveFeedController@pastor')->name('live_feed.pastor');
@@ -31,16 +31,16 @@ Route::group(['prefix' => '/catalog'], function () {
         return view('catalog', ['churchs' => $churchs]);
     })->name('catalog');
 
-    Route::get('/minister', function () {
+    //Route::get('/minister', function () {
         // ...
-    });
+    //});
 
     //Route::get('/church', function () {
     //    // ...
     //});
 });
 
-Route::get('/repent', 'RepentController@index')->name('repent');
+//Route::get('/repent', 'RepentController@index')->name('repent');
 
 Route::get('/about', function () {
     return view('about');
