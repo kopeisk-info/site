@@ -43,4 +43,9 @@ class Church extends Model
     {
         return $this->belongsToMany('App\Minister', 'church_ministers');
     }
+
+    public function vkGroups()
+    {
+        return $this->belongsToMany('App\VkGroups', 'church_vk_groups');
+    }
 }

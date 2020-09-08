@@ -51,12 +51,12 @@ class Minister extends Model
         return $this->hasOne('App\ChurchMinister');
     }
 
-    public function vk_users()
+    public function vkUsers()
     {
         return $this->belongsToMany('App\VkUser', 'minister_vk_users');
     }
 
-    public function vk_groups()
+    public function vkGroups()
     {
         return $this->belongsToMany('App\VkGroups', 'minister_vk_groups');
     }

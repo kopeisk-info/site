@@ -12,7 +12,7 @@ class RepentController extends Controller
 {
     public function index(Repent $repent)
     {
-        $repent = $repent->inRandomOrder()->first();
+        $repent = $repent->inRandomOrder()->firstOrFail();
         $id = 80955008;
         $declension = 'Антоном Труфановым';
         if (3 != $repent->minister_id) {
