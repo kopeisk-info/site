@@ -1,5 +1,9 @@
 @extends('template')
 
+@section('title', 'Каталог церквей Копейска и Челябинска')
+@section('description', 'Каталог христианских релииозных групп, церквей и объединений города Копейска и Челябинска.')
+@section('keywords', 'каталог церквей, справочник церквей, христианские церкви, религиозные группы Копейска, религиозные группы Челябинска, церкви Копейска, церкви Челябинска')
+
 @section('main')
     <div class="row">
 
@@ -8,23 +12,29 @@
             <div class="col-sx-12 col-lg-6">
                 <div class="card mb-4">
                     <div class="card-body">
-                        <div class="h5">{{ $church->name }}</div>
+                        <div class="h5" style="color: #c00">{{ $church->name }}</div>
                         @if ($church->full_name)
-                            <div class="mb-3">{{ $church->full_name }}</div>
+                            <div><b>{{ $church->full_name }}</b></div>
                         @endif
+                        <div class="mb-3">{{ $church->city }}{{ $church->district ? ', '. $church->district : '' }}</div>
                         @if ($church->foundation_date)
-                            <div>Дата основания: {{ $church->foundation_date->translatedFormat('j F Y') }}</div>
+                            <div>Основана {{ $church->foundation_date->translatedFormat('j F Y') }}</div>
                         @endif
                         @if ($church->registration_date)
                             <div>Зарегистрирована {{ $church->registration_date->translatedFormat('j F Y') }}</div>
                         @endif
-                        @if ($church->contact_phone)
-                            <div>Контактный номер телефона {{ $church->contact_phone }}</div>
-                        @endif
+                        <div class="mt-3">
+                            @if ($church->contact_phone)
+                                <div>Контактный номер телефона <a href="tel://{{ $church->contact_phone }}">{{ $church->contact_phone }}</a></div>
+                            @endif
+                            @if ($church->main_site)
+                                    <div>Основной сайт <a href="http://{{ $church->main_site }}" target="_blank">{{ $church->main_site }}</a></div>
+                            @endif
+                        </div>
                         @if ($ministers = $church->ministers)
                             <div class="mt-3"><b>Служителя церкви</b></div>
                             @foreach ($ministers as $minister)
-                                <div>{{ $minister->ordination->ordination }} — {{ $minister->name }}</div>
+                                <div>{{ $minister->ordination->ordination }} — {{ $minister->full_name }}</div>
                             @endforeach
                         @endif
                     </div>
