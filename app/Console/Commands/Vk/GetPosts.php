@@ -46,12 +46,14 @@ class GetPosts extends Command
      */
     public function handle()
     {
-        $this->id = $this->argument('id');
+        $id = $this->argument('id');
+        $this->id = $this->option('group') ? '-'. $id : $id;
+
         // Получаем записи со служебной информацией
         $vk = new VKApiClient();
-        $response = $vk->wall()->get(env('VK_SERVICE_KEY'), [
+        $response = $vk->wall()->get(env('VK_SERVICE_KEY_'. rand (1, 2)), [
             'lang' => 'ru',
-            'owner_id'  => $this->option('group') ? '-'. $this->id : $this->id,
+            'owner_id'  => $this->id,
             'extended' => 1,
             'filter' => 'all',
             'count' => $this->option('count'),
@@ -67,8 +69,7 @@ class GetPosts extends Command
         $profiles = VkUser::whereIn('id', $profileIds)->get();
         $ids = array_diff($profileIds , $profiles->modelKeys());
         foreach ($ids as $key => $id) {
-            $data = $this->profiles[$key];
-            VkUser::create($data);
+            VkUser::create($this->profiles[$key]);
         }
 
         // Добавление отсутсвующих зависимостей(группы)
@@ -76,15 +77,19 @@ class GetPosts extends Command
         $groups = VkGroup::whereIn('id', $groupIds)->get();
         $ids = array_diff($groupIds , $groups->modelKeys());
         foreach ($ids as $key => $id) {
-            $data = $this->groups[$key];
-            VkGroup::create($data);
+            VkGroup::create($this->groups[$key]);
         }
 
         // Добавление или обновление постов
-        foreach($this->posts as $post) {
-            VkPost::updateOrCreate([
-                'owner_id' => $post['owner_id'], 'id' => $post['id']
-            ], $post);
+        foreach($this->posts as $data) {
+            // Очистка постоянно меняющихся полей у видеовложений
+            if (isset($data['attachments'])) {
+                $types = array_column($data['attachments'], 'type');
+                if (false !== ($key = array_search('video', $types))) {
+                    unset($data['attachments'][$key]['video']['track_code']);
+                }
+            }
+            VkPost::updateOrCreate(['uuid' => $this->id .'_'. $data['id']], $data);
         }
 
         // Удаление отсуствующих постов
