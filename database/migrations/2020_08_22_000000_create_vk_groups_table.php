@@ -21,7 +21,7 @@ class CreateVkGroupsTable extends Migration
             $table->boolean('is_closed')->default(0);
             $table->boolean('can_see_all_posts')->default(1);
             $table->string('type');
-            $table->string('photo_50');
+            $table->string('photo_50')->nullable();
             $table->timestamps();
         });
     }

@@ -23,7 +23,7 @@ class CreateVkUsersTable extends Migration
             $table->boolean('can_see_all_posts')->default(1);
             $table->smallInteger('sex');
             $table->string('screen_name')->nullable();
-            $table->string('photo_50');
+            $table->string('photo_50')->nullable();
             $table->timestamps();
         });
     }
