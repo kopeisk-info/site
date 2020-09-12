@@ -20,10 +20,9 @@ Route::get('/', 'IndexController@show')->name('root');
 Route::resource('/news', 'NewsController')->only(['index', 'show'])->name('index', 'news');
 
 //Route::resource('/events', 'EventsController')->only(['index', 'show'])->name('index', 'events');
-
-Route::get('/live-feed', 'LiveFeedController@index')->name('live_feed');
-Route::get('/live-feed/pastor', 'LiveFeedController@pastor')->name('live_feed.pastor');
-Route::get('/live-feed/church', 'LiveFeedController@church')->name('live_feed.church');
+Route::get('/live-feed/{year?}', 'LiveFeedController@index')->where('year', '[0-9]+')->name('live_feed');
+Route::get('/live-feed/pastor/{year?}', 'LiveFeedController@pastor')->where('year', '[0-9]+')->name('live_feed.pastor');
+Route::get('/live-feed/church/{year?}', 'LiveFeedController@church')->where('year', '[0-9]+')->name('live_feed.church');
 
 Route::group(['prefix' => '/catalog'], function () {
     Route::get('/', function () {

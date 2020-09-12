@@ -13,6 +13,7 @@
             @elseif(Route::is('live_feed.church'))
                 <div>Записи из церковных групп</div>
             @endif
+
             <div class="row row-cols-1 row-cols-md-2 row-cols-xxl-3">
                 @foreach($posts as $post)
                     <div class="col mb-4">
@@ -52,6 +53,14 @@
                     <li class="nav-item">
                         <a {{ Route::is('live_feed.church') ? 'class=active aria-current=page' : '' }} href="{{ route('live_feed.church') }}" title="Отобразить только записи из церковных групп">Записи из церковных групп</a>
                     </li>
+                </ul>
+
+                <ul class="nav mt-3">
+                    @foreach($years as $year)
+                        <li class="nav-item pr-3">
+                            <a {{ $year->active ? 'class=active aria-current=page' : '' }} href="{{ $year->link }}"  title="Все записи за {{ $year->year }} год">{{ $year->year }} год</a>
+                        </li>
+                    @endforeach
                 </ul>
             </div>
         </div>
