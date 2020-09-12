@@ -48,7 +48,7 @@ class GetUsers extends Command
             $ids = $collection->modelKeys();
         }
 
-        $response = $vk->users()->get(env('VK_SERVICE_KEY'), [
+        $response = $vk->users()->get(env('VK_SERVICE_KEY_'. rand (1, 2)), [
             'lang' => 'ru',
             'fields' => [
                 'photo_50',

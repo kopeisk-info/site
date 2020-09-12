@@ -48,7 +48,7 @@ class GetGroups extends Command
             $ids = $collection->modelKeys();
         }
 
-        $response = $vk->groups()->getById(env('VK_SERVICE_KEY'), [
+        $response = $vk->groups()->getById(env('VK_SERVICE_KEY_'. rand (1, 2)), [
             'lang' => 'ru',
             'group_ids'  => $ids,
             'fields' => [
