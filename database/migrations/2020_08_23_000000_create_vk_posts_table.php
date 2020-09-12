@@ -14,6 +14,7 @@ class CreateVkPostsTable extends Migration
     public function up()
     {
         Schema::create('vk_posts', function (Blueprint $table) {
+            $table->uuid('uuid');
             $table->unsignedBigInteger('id');
             $table->bigInteger('from_id');
             $table->bigInteger('owner_id');
@@ -31,9 +32,10 @@ class CreateVkPostsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->unique(['id', 'owner_id'], 'uuid');
-            $table->index('from_id');
-            $table->index('owner_id');
+            $table->unique('uuid', 'uuid');
+            $table->index('id', 'id');
+            $table->index('from_id', 'from_id');
+            $table->index('owner_id', 'owner_id');
         });
     }
 

@@ -11,6 +11,9 @@ class VkPost extends Model
 {
     use SoftDeletes;
 
+    protected $primaryKey = 'uuid';
+    public $incrementing = false;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -40,7 +43,7 @@ class VkPost extends Model
     protected $casts = [
         'date' => 'datetime',
         'attachments' => 'array',
-        'copy_history' => 'collection',
+        'copy_history' => 'array',
         'post_source' => 'array',
         'comments' => 'array',
         'likes' => 'array',
@@ -75,16 +78,23 @@ class VkPost extends Model
         return $relation;
     }
 
+    /**
+     * Encode the given value as JSON.
+     *
+     * @param  mixed  $value
+     * @return string
+     */
+    protected function asJson($value)
+    {
+        return json_encode($value, JSON_UNESCAPED_UNICODE);
+    }
+
     public static function boot()
     {
         parent::boot();
 
         static::creating(function($model) {
-            // ...
-        });
-
-        static::updating(function($model) {
-            // ...
+            $model->uuid = $model->owner_id .'_'. $model->id;
         });
     }
 }
