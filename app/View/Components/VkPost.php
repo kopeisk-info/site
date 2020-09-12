@@ -65,10 +65,8 @@ class VkPost extends Component
         $this->date = $post->date;
         $this->text = $post->text;
 
-        $this->post_link = "{$this->owner_link}?w=wall-{$this->owner_id }_{$this->post_id}";
-        if ('VkUser' === class_basename($post->owner)) {
-            $this->post_link = "{$this->owner_link}?w=wall{$this->owner_id }_{$this->post_id}";
-        }
+        $this->post_link = "{$this->owner_link}?w=wall{$post->uuid}";
+
         if ($post->attachments) {
             $attachment = current($post->attachments);
             if ('photo' === $attachment['type']) {
@@ -103,11 +101,10 @@ class VkPost extends Component
         if ($post->views && $post->views['count']) {
             $this->views = $post->views['count'];
         }
-
         if ($post->copy_history) {
             $this->action = 'репост';
-            $post = Post::make($post->copy_history->get(0));
-            $this->repost = new self($post);
+            $repost = new Post($post->copy_history[0]);
+            $this->repost = new self($repost);
         }
     }
 
