@@ -53,11 +53,11 @@ class Minister extends Model
 
     public function vkUsers()
     {
-        return $this->belongsToMany('App\VkUser', 'minister_vk_users');
+        return $this->belongsToMany('App\VkUser', 'minister_vk_users', 'minister_id', 'user_id');
     }
 
     public function vkGroups()
     {
-        return $this->belongsToMany('App\VkGroups', 'minister_vk_groups');
+        return $this->belongsToMany('App\VkGroup', 'minister_vk_groups', 'minister_id', 'group_id');
     }
 }

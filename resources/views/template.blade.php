@@ -99,14 +99,13 @@
                             © Проект «{{ config('app.name') }}» – вестник пробуждения, 2020
                         </div>
                         <div class="footer-version">
-                            Версия Pre-Alpha <a href="https://github.com/kopeisk-info/site/releases" target="_blank" title="Последная версия на GitHub">0.0.7</a> ·
+                            Версия Pre-Alpha <a href="https://github.com/kopeisk-info/site/releases" target="_blank" title="Последная версия на GitHub">0.0.7</a>
+                            {{-- ·
                             <a href="https://vk.com/kopeisk_info?z=moneysend-100483740" target="_blank" title="Финансовая поддержка, спонсорство">Поддержать</a> или
                             <a href="" title="">стать участником</a> проекта
-{{--
-    <a href="https://vk.com/kopeisk_info?z=moneysend-100483740" target="_blank" title="Финансовая поддержка проекта, спонсорство">Поддержать проект</a> ·
-    Стать участником проекта
---}}
-
+                            <a href="https://vk.com/kopeisk_info?z=moneysend-100483740" target="_blank" title="Финансовая поддержка проекта, спонсорство">Поддержать проект</a> ·
+                            Стать участником проекта
+                            --}}
                         </div>
                     </div>
                 </div>
