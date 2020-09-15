@@ -11,14 +11,19 @@ use App\News;
 
 class NewsController extends Controller
 {
-    public function index()
+    public function index(News $news)
     {
-        return view('news');
+        $news = $news->orderByDesc('date_at')->with(['church', 'minister'])->paginate(18);
+        return view('news')->with('news', $news);
     }
 
-    public function show()
+    public function show(News $news, $id)
     {
-        return view('news');
+        $news = $news->with(['church', 'minister'])
+            ->where('date_at', date('Y-m-d H:i:s', substr($id, 0, 10)))
+            ->where('id', substr($id, 10))
+            ->firstOrFail();
+        return view('news_show', ['news' => $news]);
     }
 
     public function create(Request $request)

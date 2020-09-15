@@ -32,4 +32,14 @@ class News extends Model
     protected $casts = [
         'date_at' => 'datetime',
     ];
+
+    public function church()
+    {
+        return $this->belongsTo('App\Church');
+    }
+
+    public function minister()
+    {
+        return $this->belongsTo('App\Minister');
+    }
 }

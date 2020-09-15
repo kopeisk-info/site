@@ -17,7 +17,11 @@ use App\VkUser;
 
 Route::get('/', 'IndexController@show')->name('root');
 
-Route::resource('/news', 'NewsController')->only(['index', 'create', 'store', 'show'])->name('index', 'news');
+Route::resource('news', 'NewsController')
+    ->only(['index', 'create', 'store'])
+    ->name('index', 'news');
+
+Route::get('news/{id}', 'NewsController@show')->where('id', '[0-9]+')->name('news.show');
 
 //Route::resource('/events', 'EventsController')->only(['index', 'show'])->name('index', 'events');
 Route::get('/live-feed/{year?}', 'LiveFeedController@index')->where('year', '[0-9]+')->name('live_feed');
