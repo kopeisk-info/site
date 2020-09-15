@@ -10,6 +10,8 @@ window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
+//global.$ = global.jQuery = require('jquery');
+
 import 'bootstrap';
 
 /**
