@@ -43,7 +43,7 @@ class GetWalls extends Command
     {
         $groups = DB::table('church_vk_groups')->union(DB::table('minister_vk_groups'))->get();
         $groups->each(function ($item) {
-            if (DB::table('vk_groups')->where('can_see_all_posts', 1)->find($item->group_id)) {
+            if (DB::table('vk_groups')->where('is_closed', 0)->find($item->group_id)) {
                 print("Получение последних записей группы с ID {$item->group_id}\n\r");
                 Artisan::call('vk:get-posts', ['id' => $item->group_id, '--group' => true]);
             }
@@ -51,7 +51,7 @@ class GetWalls extends Command
 
         $users = DB::table('minister_vk_users')->get();
         $users->each(function ($item) {
-            if (DB::table('vk_users')->where('can_see_all_posts', 1)->find($item->user_id)) {
+            if (DB::table('vk_users')->where('is_closed', 0)->find($item->user_id)) {
                 print("Получение последних записей аккаунта с ID {$item->user_id}\n\r");
                 Artisan::call('vk:get-posts', ['id' => $item->user_id]);
             }

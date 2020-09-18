@@ -20,7 +20,6 @@ Route::get('/', 'IndexController@show')->name('root');
 Route::resource('news', 'NewsController')
     ->only(['index', 'create', 'store'])
     ->name('index', 'news');
-
 Route::get('news/{id}', 'NewsController@show')->where('id', '[0-9]+')->name('news.show');
 
 //Route::resource('/events', 'EventsController')->only(['index', 'show'])->name('index', 'events');
@@ -43,8 +42,8 @@ Route::group(['prefix' => '/catalog'], function () {
     //});
 });
 
-//Route::get('/repent', 'RepentController@index')->name('repent');
+Route::get('/repent', 'RepentController@index')->name('repent');
 
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
+//Route::get('/about', function () {
+// return view('about');
+//})->name('about');

@@ -5,13 +5,13 @@
         <div class="col-sx-12 col-lg-9">
             <div class="sticky-top" style="top: 75px;">
             @if (Route::has('news'))
-                <h2><a href="{{ route('news') }}">Последние новости</a></h2>
+                <h2><a href="{{ route('news') }}">Новости</a></h2>
                     @foreach ($news as $news)
                         <div class="news-item mb-4">
                             @if ($news->image)
                                 <div class="row">
                                     <div class="col-sm-12 col-lg-4">
-                                        <img src="{{ asset('storage/'. $news->image) }}" class="rounded img-fluid">
+                                        <img src="{{ asset('storage/'. $news->image) }}" class="rounded img-fluid img-thumbnail">
                                     </div>
                                     <div class="col-sm-12 col-lg-8">
                                         <h2 class="h4 mb-1">
@@ -30,7 +30,7 @@
                             @endif
                         </div>
                     @endforeach
-                    <a href="{{ route('live_feed') }}" title="Перейти в раздел новостей">Посмотреть все новости</a>
+                    <a href="{{ route('news') }}" title="Перейти в раздел новостей">Посмотреть все новости</a>
             @endif
             </div>
         </div>

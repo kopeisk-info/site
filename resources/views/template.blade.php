@@ -96,7 +96,7 @@
                         </div>
                         --}}
                         <div class="footer-copy">
-                            © Проект «{{ config('app.name') }}» – вестник пробуждения, 2020
+                            © Проект «{{ config('app.name') }}» — вестник пробуждения, 2020
                         </div>
                         <div class="footer-version">
                             Версия Pre-Alpha · <a href="https://github.com/kopeisk-info/site/releases" target="_blank" title="Последная версия на GitHub">0.0.7</a>

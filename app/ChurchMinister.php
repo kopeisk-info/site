@@ -32,4 +32,14 @@ class ChurchMinister extends Model
     protected $casts = [
         // ...
     ];
+
+    public function church()
+    {
+        return $this->belongsTo('App\Church');
+    }
+
+    public function minister()
+    {
+        return $this->belongsTo('App\Minister');
+    }
 }

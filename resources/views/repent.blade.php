@@ -7,22 +7,21 @@
 @section('main')
     <div class="row">
         <div class="col-sx-12 col-lg-9">
-            <h1 class="h2">Молитва покаяния c {{ $declension }}</h1>
+            <h1 class="h2">Молитва покаяния</h1>
             <div class="text-justify mb-5">
                 {!! $prayer !!}
             </div>
 
-            <div class="alert alert-success mb-0" role="alert">
-                <div class="h5">Если Вы искренне молились</div>
-
-                Бог услышал Вас и простил все Ваши грехи.
-                Теперь Бог – Ваш Отец, а Иисус – Ваш друг.
-                Читайте Слово, живите с Богом, молитесь.
+            <div class="mb-0">
+                <p><strong>Если Вы искренне молились.</strong></p>
+                <p>Бог услышал Вас и простил все Ваши грехи.
+                    Теперь Бог – Ваш Отец, а Иисус – Ваш друг.
+                    Читайте Слово, живите с Богом, молитесь.</p>
             </div>
         </div>
         <div class="col-sx-12 col-lg-3">
             <div class="side sticky-top" style="top: 80px">
-                <div class="d-flex justify-content-start mb-4">
+                <div class="d-flex justify-content-start">
                     <div class="card-photo">
                         <a href="{{ $from_link }}" class="card-title" target="_blank" title="{{ $name }}">
                             <img src="{{ $photo }}" alt="{{ $name }}" class="rounded-circle">
@@ -30,9 +29,11 @@
                     </div>
                     <div class="card-info" style="width: 100%; margin-left: 15px; overflow: hidden; text-overflow: ellipsis;">
                         <a href="{{ $from_link }}" class="card-title" target="_blank" title="{{ $name }}" style="white-space: nowrap;">{{ $name }}</a>
-                        <div style="font-size: 13px; margin-top: 5px;">{{ $city }}</div>
+                        <div style="font-size: 13px;">{{ $ordination }}</div>
                     </div>
                 </div>
+                <div style="font-size: 13px;" class="mt-2">{{ $church }}</div>
+                <div style="font-size: 13px;" class="mb-4">{{ $city ? 'город '. $city : '' }}</div>
 
                 <div class="alert alert-warning" role="alert">
                     <div class="h5" style="color: #c00">
@@ -41,7 +42,6 @@
                             <path d="M7.84 4.1a.178.178 0 0 1 .32 0l.634 1.285a.178.178 0 0 0 .134.098l1.42.206c.145.021.204.2.098.303L9.42 6.993a.178.178 0 0 0-.051.158l.242 1.414a.178.178 0 0 1-.258.187l-1.27-.668a.178.178 0 0 0-.165 0l-1.27.668a.178.178 0 0 1-.257-.187l.242-1.414a.178.178 0 0 0-.05-.158l-1.03-1.001a.178.178 0 0 1 .098-.303l1.42-.206a.178.178 0 0 0 .134-.098L7.84 4.1z"/>
                         </svg> Важная информация!
                     </div>
-                    {{--<div>Последние записи, оставленные на стенах личных аккаунтов служителей и церковных групп.</div>--}}
                     <p>Если Вы еще не приняли Иисуса Христа Своим Господом и Спасителем,
                         прямо сейчас Вы можете обратиться к Нему с молитвой.</p>
                     <p>Бог даст Вашей душе истинную радость, мир и счастье. Только в Боге Вы найдете ответы
