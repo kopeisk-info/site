@@ -11,7 +11,7 @@ class IndexController extends Controller
     public function show()
     {
         $news = News::orderBy('date_at', 'DESC')->limit(5)->get();
-        $posts = VkPost::orderBy('date', 'DESC')->limit(5)->get();
+        $posts = VkPost::orderBy('date', 'DESC')->limit(3)->get();
 
         return view('index')
             ->with('news', $news)
