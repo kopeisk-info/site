@@ -80,6 +80,11 @@ class GetPosts extends Command
             VkGroup::create($this->groups[$key]);
         }
 
+        $ids = array_reverse(array_column($this->posts, 'id'));
+
+        // Востанавление удаленных записей
+        VkPost::onlyTrashed()->where('owner_id', $this->id)->whereIn('id', $ids)->restore();
+
         // Добавление или обновление постов
         foreach($this->posts as $data) {
             // Очистка постоянно меняющихся полей у видеовложений
@@ -93,7 +98,6 @@ class GetPosts extends Command
         }
 
         // Удаление отсуствующих постов
-        $ids = array_reverse(array_column($this->posts, 'id'));
         $posts = VkPost::where('owner_id', $this->id)
             ->whereNotIn('id', $ids)
             ->whereBetween('id', [current($ids), end($ids)])
