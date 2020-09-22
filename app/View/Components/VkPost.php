@@ -114,19 +114,13 @@ class VkPost extends Component
         if (preg_match('/^\d+$/', $id)) {
             // User
             if (! VkUser::find($id)) {
-                Artisan::call('vk:get-users', [
-                    'ids' => $id,
-                    '--copy' => true
-                ]);
+                Artisan::call('vk:get-users', ['ids' => $id]);
             }
         } else {
             // Group
             $id = trim($id, '-');
             if (! VkGroup::find($id)) {
-                Artisan::call('vk:get-groups', [
-                    'ids' => $id,
-                    '--copy' => true
-                ]);
+                Artisan::call('vk:get-groups', ['ids' => $id]);
             }
         }
 
